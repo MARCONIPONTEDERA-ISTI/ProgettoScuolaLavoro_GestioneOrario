@@ -11,7 +11,7 @@ Questo Repository contiene:
 per la ‘Gestione dell'orario dell'istituto’
  - semplice parser per la lettura del orario dell'istituto 
 
- - giornale di bordo: un elenco giornaliero delle attività svolte [Giornale Di Bordo](Giornale-di-Bordo).
+ - [Giornale Di Bordo](https://github.com/MARCONIPONTEDERA-ISTI/ProgettoScuolaLavoro_GestioneOrario/wiki/Giornale-di-Bordo): un elenco giornaliero delle attività svolte .
 
 
 di seguito un esempio di mockup dell’applicazione:
