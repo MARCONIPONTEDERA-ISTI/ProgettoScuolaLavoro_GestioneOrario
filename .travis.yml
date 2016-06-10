@@ -3,9 +3,9 @@ android:
   components:
     - platform-tools
     - build-tools-23.0.3
-    - android-20
+    - android-23
     - extra-google-google_play_services
 before_install: 
  - cd GestioneOrario
  - chmod +x gradlew
-script: ./gradlew build --debug
+script: ./gradlew build 
