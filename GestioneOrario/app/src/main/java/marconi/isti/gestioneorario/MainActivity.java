@@ -1,6 +1,10 @@
 package marconi.isti.gestioneorario;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,9 +17,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Set;
+
+import parser.TabellaOrario;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private TabellaOrario tb;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +52,26 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        FileInputStream stream = null;
+        try {
+            stream = getApplicationContext().openFileInput("name.data");
+            ObjectInputStream dout = new ObjectInputStream(stream);
+            tb = (TabellaOrario) dout.readObject();
+
+            stream.getFD().sync();
+        } catch (Exception e) {
+        }//Do something intelligent }
+        finally {
+            try {
+                if (stream != null)
+                    stream.close();
+            } catch (IOException e2) {
+            }
+        }
+
+
+        aggiornaElement();
 
       /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +90,37 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+
+    private void aggiornaElement() {
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                update();
+
+            }
+        });
+
+
+    }
+
+
+    private void update() {
+        if (tb != null) {
+            Set<String> materie = tb.getMaterie();
+            Spinner pinner = (Spinner) findViewById(R.id.spinnerMateria);
+            Context c = (Context) getApplicationContext();
+            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(c, android.R.layout.simple_spinner_item, new ArrayList<String>(materie)); //selected item will look like a spinner set from XML
+            spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            pinner.setAdapter(spinnerArrayAdapter);
+        }
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -53,7 +132,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void goToDATAUI(View v){
+    public void goToDATAUI(View v) {
         Intent i = new Intent(MainActivity.this, DataUIActivity.class);
         startActivity(i);
     }
@@ -75,6 +154,8 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(MainActivity.this, ActivitySetting.class);
+            startActivity(i);
             return true;
         }
 
@@ -97,10 +178,130 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
+        } else if (id == R.id.nav_setting) {
+
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.getMenu().findItem(R.id.nav_setting).setChecked(false);
+            AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(this);
+
+// Setting Dialog Title
+            alertDialog2.setTitle("Confirm Update Data...");
+
+// Setting Dialog Message
+            alertDialog2.setMessage("Are you sure you want update data?");
+
+// Setting Icon to Dialog
+            //   alertDialog2.setIcon(R.drawable.delete);
+
+// Setting Positive "Yes" Btn
+            alertDialog2.setPositiveButton("YES",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Write your code here to execute after dialog
+                            readAndSaveData();
+                            Toast.makeText(getApplicationContext(),
+                                    "You clicked on YES", Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                    });
+
+// Setting Negative "NO" Btn
+            alertDialog2.setNegativeButton("NO",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Write your code here to execute after dialog
+                            Toast.makeText(getApplicationContext(),
+                                    "NO data Saved", Toast.LENGTH_SHORT)
+                                    .show();
+                            dialog.cancel();
+                        }
+                    });
+
+// Showing Alert Dialog
+            alertDialog2.show();
+
+            /*Intent i = new Intent(MainActivity.this, ActivitySetting.class);
+            startActivity(i);*/
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void readAndSaveData() {
+
+        new Thread(new ClientThreadAggOrario()).start();
+
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://marconi.isti.gestioneorario/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://marconi.isti.gestioneorario/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
+
+    class ClientThreadAggOrario implements Runnable {
+
+        @Override
+        public void run() {
+            tb = new TabellaOrario("http://www.marconipontedera.it/dcb/doceboCore/orario/index.html");
+            tb.read();
+            aggiornaElement();
+
+            FileOutputStream stream = null;
+            try {
+                stream = getApplicationContext().openFileOutput("name.data", Context.MODE_PRIVATE);
+                ObjectOutputStream dout = new ObjectOutputStream(stream);
+                dout.writeObject(tb);
+                dout.flush();
+                stream.getFD().sync();
+
+            } catch (IOException e) {
+            }//Do something intelligent }
+            finally {
+                try {
+                    stream.close();
+                } catch (IOException e2) {
+                }
+            }
+        }
+
     }
 }
