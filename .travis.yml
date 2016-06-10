@@ -8,3 +8,4 @@ android:
 before_install: 
  - cd GestioneOrario
  - chmod +x gradlew
+script: ./gradlew build --info
