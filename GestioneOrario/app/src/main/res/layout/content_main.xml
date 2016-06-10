@@ -104,7 +104,8 @@
         android:layout_below="@+id/spinnerGiorno"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="52dp"
-        android:singleLine="false" />
+        android:singleLine="false"
+        android:onClick="goToDATAUI" />
 
 
 </RelativeLayout>
