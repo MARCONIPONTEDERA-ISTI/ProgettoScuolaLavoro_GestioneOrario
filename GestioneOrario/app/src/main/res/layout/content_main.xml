@@ -15,5 +15,96 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Seleziona Materia"
+        android:id="@+id/textView2"
+        android:textSize="@dimen/abc_text_size_body_1_material" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_below="@+id/textView2"
+
+        android:layout_alignParentStart="true"
+        android:spinnerMode="dropdown" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleziona Prof"
+        android:id="@+id/textView3"
+        android:textSize="@dimen/abc_text_size_body_1_material"
+        android:layout_below="@+id/spinner"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerProf"
+        android:layout_below="@+id/textView3"
+
+        android:layout_alignParentStart="true"
+        android:spinnerMode="dropdown" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleziona Aula"
+        android:id="@+id/textView4"
+        android:textSize="@dimen/abc_text_size_body_1_material"
+        android:layout_below="@+id/spinnerProf"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner2"
+        android:layout_below="@+id/textView4"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleziona Classe"
+        android:id="@+id/textView5"
+        android:textSize="@dimen/abc_text_size_body_1_material"
+        android:layout_below="@+id/spinner2"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner3"
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleziona Giorno"
+        android:id="@+id/textView6"
+        android:textSize="@dimen/abc_text_size_body_1_material"
+        android:layout_below="@+id/spinner3"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerGiorno"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentStart="true"
+        android:entries="@array/spinnerItems"
+        android:spinnerMode="dropdown" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Avvia Ricerca"
+        android:id="@+id/button"
+        android:layout_below="@+id/spinnerGiorno"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="52dp"
+        android:singleLine="false" />
+
+
 </RelativeLayout>
