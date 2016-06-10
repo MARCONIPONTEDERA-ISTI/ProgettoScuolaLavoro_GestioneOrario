@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/MARCONIPONTEDERA-ISTI/ProgettoScuolaLavoro_GestioneOrario.svg?branch=master)](https://travis-ci.org/MARCONIPONTEDERA-ISTI/ProgettoScuolaLavoro_GestioneOrario)
+
 # Progetto Scuola Lavoro 
 effettuato presso il Laboratorio FMT dell'Istituto ISTI del CNR di Pisa
 da Toni Jacopo e Becuzzi Filippo della 3ASA 
