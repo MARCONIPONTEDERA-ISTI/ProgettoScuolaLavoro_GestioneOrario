@@ -1,9 +1,10 @@
 package parser;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Orario {
+public class Orario implements Serializable {
 
 	private Date orainizio;
 	private Date orafine;

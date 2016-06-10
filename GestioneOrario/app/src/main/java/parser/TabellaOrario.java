@@ -1,6 +1,7 @@
 package parser;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,16 +18,17 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
-public class TabellaOrario {
+public class TabellaOrario implements Serializable {
 
 	List<GiornoSettimana> orariosettimana;
 	Map<String,List<String>> mapMateriaProf;
 	private String url;
 
 	
-	public TabellaOrario(){
+	public TabellaOrario(String url){
 		orariosettimana = new ArrayList<GiornoSettimana>();
 		mapMateriaProf = new HashMap<String, List<String>>();
+		this.url = url;
 	}
 
 
@@ -187,9 +189,9 @@ public class TabellaOrario {
 
 				}
 				
-			/*if(o==0)
+			if(o==7)
 					break;
-				o++;*/
+				o++;
 			}
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block

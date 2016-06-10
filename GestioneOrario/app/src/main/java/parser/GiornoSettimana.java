@@ -1,10 +1,11 @@
 package parser;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GiornoSettimana {
+public class GiornoSettimana implements Serializable {
 	
 	private Map<String,Classe> listaClassi;
 	private Map<String,Professore> listaProfessori;
