@@ -5,4 +5,6 @@ android:
     - build-tools-23.0.3
     - android-20
     - extra-google-google_play_services
-before_install: cd GestioneOrario
+before_install: 
+  cd GestioneOrario
+  chmod +x gradlew
