@@ -183,6 +183,8 @@ public class MainActivity extends AppCompatActivity
 
             ArrayList<Orario> lo = tb.SearchbyProf(pf,g+1);
             i.putExtra("ListaOrari", lo);
+            i.putExtra("giorno",tb.getGiorno(g+1));
+            i.putExtra("tipo",pf);
         }
 
 

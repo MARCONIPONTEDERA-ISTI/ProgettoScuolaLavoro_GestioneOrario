@@ -359,25 +359,25 @@ public class TabellaOrario implements Serializable {
 
 	}
 
-	private  String getGiorno(int num){
+	public  String getGiorno(int num){
 		switch (num) {
 		case 1:
-			return "LUN";
+			return "LUNEDI";
 
 		case 2:
-			return "MAR";
+			return "MARTEDI";
 
 		case 3:
-			return "MER";
+			return "MERCOLEDI";
 
 		case 4:
-			return "GIO";
+			return "GIOVEDI";
 
 		case 5:
-			return "VEN";
+			return "VENERDI";
 
 		case 6:
-			return "SAB";
+			return "SABATO";
 
 		default:
 			break;

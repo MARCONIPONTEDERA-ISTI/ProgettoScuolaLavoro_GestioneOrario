@@ -33,6 +33,15 @@ public class DataUIActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         lo =  (ArrayList<Orario>)getIntent().getSerializableExtra("ListaOrari");
 
+        String giorno = b.getString("giorno");
+
+        TextView textgiorno = (TextView)findViewById(R.id.giornoricerca);
+        textgiorno.setText(giorno);
+
+        String tipo = b.getString("tipo");
+        TextView tipo_ricerca = (TextView)findViewById(R.id.tipo_ricerca);
+        tipo_ricerca.setText(tipo);
+
         ToggleButton prima = (ToggleButton)findViewById(R.id.buttonO1);
         ToggleButton seconda = (ToggleButton)findViewById(R.id.buttonO2);
         ToggleButton terza = (ToggleButton)findViewById(R.id.buttonO3);

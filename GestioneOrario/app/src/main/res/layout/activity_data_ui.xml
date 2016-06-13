@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/tiporicerca"
+        android:id="@+id/giornoricerca"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/giorno_ricerca"
+        android:id="@+id/tipo_ricerca"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 
@@ -31,8 +31,8 @@
         android:id="@+id/radioPiano"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@id/giorno_ricerca"
-        android:layout_below="@+id/giorno_ricerca" >
+        android:layout_alignRight="@id/tipo_ricerca"
+        android:layout_below="@+id/tipo_ricerca" >
 
     <RadioButton
         android:layout_width="wrap_content"
@@ -138,7 +138,7 @@
         android:layout_toEndOf="@+id/buttonO5" />
 
 
-    <android.support.v7.widget.CardView
+   <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_gravity="center"
