@@ -16,12 +16,15 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
             android:id="@+id/classecard"
+
+            android:background="@android:color/holo_red_light"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="16dp"
-            />
+            android:text="3AMM" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,31 +32,45 @@
             android:id="@+id/profcard"
             android:layout_toRightOf="@+id/classecard"
             android:layout_alignParentTop="true"
-            android:textSize="30sp"
+            android:textSize="20sp"
+            android:text="MERLINI FRANCESCA"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/materiacard"
-            android:layout_toRightOf="@+id/profcard"
-            android:layout_below="@+id/classecard"
+            android:layout_below="@+id/profcard"
+            android:text="ELETTROT. ED ELE."
+            android:layout_toRightOf="@+id/classecard"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/ora_inizio"
-            android:layout_toRightOf="@+id/materiacard"
+            android:layout_toRightOf="@+id/classecard"
             android:layout_below="@+id/materiacard"
+            android:text="00:00"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/ora_fine"
-            android:layout_toRightOf="@+id/ora_inizio"
+            android:text="00:00"
+            android:layout_below="@+id/materiacard"
+            android:layout_alignEnd="@+id/profcard" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/aula_card"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:background="@android:color/holo_red_light"
+
+            android:text="LAB1"
             />
     </RelativeLayout>
 

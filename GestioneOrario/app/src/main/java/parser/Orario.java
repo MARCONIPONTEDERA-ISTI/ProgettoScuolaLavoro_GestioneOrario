@@ -30,11 +30,19 @@ public class Orario implements Serializable{
 	public Date getOrainizio() {
 		return orainizio;
 	}
+	public String getSOrainizio() {
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+		return format.format(orainizio);
+	}
 	public void setOrainizio(Date orainizio) {
 		this.orainizio = orainizio;
 	}
 	public Date getOrafine() {
 		return orafine;
+	}
+	public String getSOrafine() {
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+		return format.format(orafine);
 	}
 	public void setOrafine(Date orafine) {
 		this.orafine = orafine;
@@ -58,8 +66,9 @@ public class Orario implements Serializable{
 		Classe = classe;
 	}
 
-
-
+	public String getMateria() {
+		return Materia;
+	}
 
 	@Override
 	public String toString() {

@@ -25,7 +25,7 @@ public class ListenerTB  implements CompoundButton.OnCheckedChangeListener {
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-        Activity t = (Activity) buttonView.getContext();
+      /*  Activity t = (Activity) buttonView.getContext();
         TextView tv = (TextView) t.findViewById(R.id.info_text);
         if(isChecked)
         {
@@ -50,7 +50,7 @@ public class ListenerTB  implements CompoundButton.OnCheckedChangeListener {
            }else{
                s.setChecked(false);
            }
-        }
+        }/*
       /*  switch (buttonView.getId()){
             case R.id.buttonO1 : {ora = 1; break;}
             case R.id.buttonO2 : {ora = 2; break;}
@@ -61,7 +61,7 @@ public class ListenerTB  implements CompoundButton.OnCheckedChangeListener {
             default :  {ora = 0; break;}
         }*/
 
-
+/*
             Orario o = new Orario(null,null,"1","1","1","1");
             if(ora>0 & ora-1<lo.size()) {
 
@@ -75,7 +75,7 @@ public class ListenerTB  implements CompoundButton.OnCheckedChangeListener {
         {
             tv.setText("");
         }
-
+*/
     }
 }
 
