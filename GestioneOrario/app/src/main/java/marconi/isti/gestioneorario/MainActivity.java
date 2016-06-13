@@ -1,6 +1,7 @@
 package marconi.isti.gestioneorario;
 
 import android.app.AlertDialog;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,8 +33,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
+import parser.Professore;
 import parser.TabellaOrario;
 
 public class MainActivity extends AppCompatActivity
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity
 
         FileInputStream stream = null;
         try {
-            stream = getApplicationContext().openFileInput("name.data");
+            stream = getApplicationContext().openFileInput("TabellaOrario.data");
             ObjectInputStream dout = new ObjectInputStream(stream);
             tb = (TabellaOrario) dout.readObject();
 
@@ -102,6 +105,9 @@ public class MainActivity extends AppCompatActivity
             public void run() {
                 // TODO Auto-generated method stub
                 update();
+                Toast.makeText(getApplicationContext(),
+                        "Download Completato", Toast.LENGTH_SHORT)
+                        .show();
 
             }
         });
@@ -112,12 +118,39 @@ public class MainActivity extends AppCompatActivity
 
     private void update() {
         if (tb != null) {
+
+            //spinner materie
             Set<String> materie = tb.getMaterie();
             Spinner pinner = (Spinner) findViewById(R.id.spinnerMateria);
             Context c = (Context) getApplicationContext();
-            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(c, android.R.layout.simple_spinner_item, new ArrayList<String>(materie)); //selected item will look like a spinner set from XML
+            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(c, R.layout.spinnercustom, new ArrayList<String>(materie)); //selected item will look like a spinner set from XML
             spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             pinner.setAdapter(spinnerArrayAdapter);
+
+            //Prof
+            ArrayList<String> professori = tb.getProfessori();
+            Spinner pinnerf = (Spinner) findViewById(R.id.spinnerProf);
+            ArrayAdapter<String> spinnerfArrayAdapter = new ArrayAdapter<String>(c,R.layout.spinnercustom, professori); //selected item will look like a spinner set from XML
+            spinnerfArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            pinnerf.setAdapter(spinnerfArrayAdapter);
+
+            //Aule
+            ArrayList<String> aule = tb.getAule();
+            Spinner pinnera = (Spinner) findViewById(R.id.spinnerAula);
+            ArrayAdapter<String> spinneraArrayAdapter = new ArrayAdapter<String>(c, R.layout.spinnercustom, aule); //selected item will look like a spinner set from XML
+            spinneraArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            pinnera.setAdapter(spinneraArrayAdapter);
+
+            //Classi
+            ArrayList<String> classi = tb.getClassi();
+            Spinner pinnerc = (Spinner) findViewById(R.id.spinnerClasse);
+            ArrayAdapter<String> spinnercArrayAdapter = new ArrayAdapter<String>(c,R.layout.spinnercustom, classi); //selected item will look like a spinner set from XML
+            spinnercArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            pinnerc.setAdapter(spinnercArrayAdapter);
+
+
+
+
         }
     }
 
@@ -287,7 +320,7 @@ public class MainActivity extends AppCompatActivity
 
             FileOutputStream stream = null;
             try {
-                stream = getApplicationContext().openFileOutput("name.data", Context.MODE_PRIVATE);
+                stream = getApplicationContext().openFileOutput("TabellaOrario.data", Context.MODE_PRIVATE);
                 ObjectOutputStream dout = new ObjectOutputStream(stream);
                 dout.writeObject(tb);
                 dout.flush();

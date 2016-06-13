@@ -22,12 +22,23 @@ public class TabellaOrario implements Serializable {
 
 	List<GiornoSettimana> orariosettimana;
 	Map<String,List<String>> mapMateriaProf;
+	ArrayList<String> ListProf;
+	ArrayList<String> ListAule;
+	ArrayList<String> ListClassi;
 	private String url;
 
 	
 	public TabellaOrario(String url){
 		orariosettimana = new ArrayList<GiornoSettimana>();
 		mapMateriaProf = new HashMap<String, List<String>>();
+		ListProf = new ArrayList<String>();
+		ListProf.add(" ");
+		ListAule = new ArrayList<String>();
+		ListAule.add(" ");
+
+		ListClassi = new ArrayList<String>();
+		ListClassi.add(" ");
+
 		this.url = url;
 	}
 
@@ -157,7 +168,15 @@ public class TabellaOrario implements Serializable {
 									
 									
 									Classe classed = day.getListaClassi(classe);
+
+									if(!ListClassi.contains(classe)){
+										ListClassi.add(classe);
+									}
+
 									Professore f = day.getProf(nomeprof);
+									if(!ListProf.contains(nomeprof)){
+										ListProf.add(nomeprof);
+									}
 									setMapMateriaProf(materia,f.getNome());
 									Orario orario = null;
 									if(numaula.length>1){
@@ -166,6 +185,9 @@ public class TabellaOrario implements Serializable {
 											orario =  new Orario(d1, finale, string, nomeprof, classe, materia);
 											Aula a = day.getAula(string);
 											a.setListaOrari(orario);
+											if(!ListAule.contains(string)){
+												ListAule.add(string);
+											}
 											
 										}
 										
@@ -173,6 +195,9 @@ public class TabellaOrario implements Serializable {
 										orario =  new Orario(d1, finale, aula, nomeprof, classe, materia);
 										Aula a = day.getAula(aula);
 										a.setListaOrari(orario);
+										if(!ListAule.contains(aula)){
+											ListAule.add(aula);
+										}
 										
 									}
 									classed.setListaOrari(orario);
@@ -365,7 +390,17 @@ public class TabellaOrario implements Serializable {
 
 	}
 
+	public ArrayList<String> getProfessori(){
+		return ListProf;
+	}
 
+	public ArrayList<String> getClassi(){
+		return ListClassi;
+	}
+
+	public ArrayList<String> getAule(){
+		return ListAule;
+	}
 
 	public Set<String> getMaterie() {
 		
