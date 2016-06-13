@@ -1,10 +1,13 @@
 package parser;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Orario implements Serializable {
+public class Orario implements Serializable{
 
 	private Date orainizio;
 	private Date orafine;
@@ -54,6 +57,10 @@ public class Orario implements Serializable {
 	public void setClasse(String classe) {
 		Classe = classe;
 	}
+
+
+
+
 	@Override
 	public String toString() {
 		SimpleDateFormat format = new SimpleDateFormat("HH:mm");

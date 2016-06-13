@@ -318,8 +318,8 @@ public class TabellaOrario implements Serializable {
 
 	}
 
-	public  List<Orario> SearchbyProf(String string, int i) {
-		List<Orario> LOrario = new ArrayList<Orario>();
+	public  ArrayList<Orario> SearchbyProf(String string, int i) {
+		ArrayList<Orario> LOrario = new ArrayList<Orario>();
 		for(GiornoSettimana gs  : orariosettimana){
 			if(gs.getDayofweek()==i){
 				LOrario = gs.searchProfessore(string);

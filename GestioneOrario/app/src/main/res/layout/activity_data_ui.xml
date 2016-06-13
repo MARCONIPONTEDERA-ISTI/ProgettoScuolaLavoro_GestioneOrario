@@ -60,7 +60,7 @@
     </RadioGroup>
 
 
-            <marconi.isti.gestioneorario.TouchImageView
+    <marconi.isti.gestioneorario.TouchImageView
         android:layout_width="310dp"
         android:layout_height="250dp"
         android:id="@+id/imageView2"

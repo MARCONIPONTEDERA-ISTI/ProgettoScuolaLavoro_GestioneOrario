@@ -33,9 +33,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import parser.Orario;
 import parser.Professore;
 import parser.TabellaOrario;
 
@@ -166,7 +168,24 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void goToDATAUI(View v) {
+        Spinner materia = (Spinner)findViewById(R.id.spinnerMateria);
+        Spinner prof = (Spinner)findViewById(R.id.spinnerProf);
+        Spinner aula = (Spinner) findViewById(R.id.spinnerAula);
+        Spinner classe = (Spinner) findViewById(R.id.spinnerClasse);
+        Spinner giorno = (Spinner) findViewById(R.id.spinnerGiorno);
+
+
+
         Intent i = new Intent(MainActivity.this, DataUIActivity.class);
+        if(tb!=null){
+            int g = giorno.getSelectedItemPosition();
+            String pf = prof.getSelectedItem().toString();
+
+            ArrayList<Orario> lo = tb.SearchbyProf(pf,g+1);
+            i.putExtra("ListaOrari", lo);
+        }
+
+
         startActivity(i);
     }
 

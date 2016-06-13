@@ -7,7 +7,7 @@ import java.util.List;
 public class Professore implements Serializable {
 	
 	private String Nome;
-	private List<Orario> listaOrari;
+	private ArrayList<Orario> listaOrari;
 	
 	public Professore(){
 		listaOrari = new ArrayList<Orario>();
@@ -21,7 +21,7 @@ public class Professore implements Serializable {
 		this.Nome = nome;
 	}
 
-	public List<Orario> getListaOrari() {
+	public ArrayList<Orario> getListaOrari() {
 		return listaOrari;
 	}
 

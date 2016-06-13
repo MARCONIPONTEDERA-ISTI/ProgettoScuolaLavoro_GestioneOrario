@@ -1,6 +1,7 @@
 package parser;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class GiornoSettimana implements Serializable {
 	}
 	
 	
-	public List<Orario> searchProfessore(String Nome){
+	public ArrayList<Orario> searchProfessore(String Nome){
 		Professore i = listaProfessori.get(Nome);
 		if(i!=null){
 			return i.getListaOrari();
