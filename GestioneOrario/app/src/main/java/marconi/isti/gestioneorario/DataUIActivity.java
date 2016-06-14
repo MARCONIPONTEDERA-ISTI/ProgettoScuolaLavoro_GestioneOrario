@@ -93,11 +93,12 @@ public class DataUIActivity extends AppCompatActivity {
 
                     int ora = 0;
                     for( ToggleButton s: ltb){
-                        if(position==s.getId()){
+                        if(position==ora){
                             s.setChecked(true);
                         }else{
                             s.setChecked(false);
                         }
+                        ora++;
                     }
                 }
             } );

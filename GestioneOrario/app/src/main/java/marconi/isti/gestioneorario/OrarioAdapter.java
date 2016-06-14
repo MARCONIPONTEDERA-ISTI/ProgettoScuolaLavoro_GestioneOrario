@@ -21,7 +21,6 @@ public class OrarioAdapter extends RecyclerView.Adapter<OrarioAdapter.OrarioView
     private static MyClickListener myClickListener;
 
 
-
     public OrarioAdapter(List<Orario> persons){
         super();
         this.lorario = persons;
@@ -29,10 +28,6 @@ public class OrarioAdapter extends RecyclerView.Adapter<OrarioAdapter.OrarioView
 
     public static void setMyClickListener(MyClickListener myClickListener) {
         OrarioAdapter.myClickListener = myClickListener;
-    }
-
-    public static MyClickListener getMyClickListener() {
-        return myClickListener;
     }
 
     @Override
@@ -45,7 +40,6 @@ public class OrarioAdapter extends RecyclerView.Adapter<OrarioAdapter.OrarioView
 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_classe, parent, false);
         OrarioViewHolder pvh = new OrarioViewHolder(v);
-
         return pvh;
     }
 
