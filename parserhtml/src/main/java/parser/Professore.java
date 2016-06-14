@@ -1,12 +1,13 @@
 package parser;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Professore {
+public class Professore implements Serializable {
 	
 	private String Nome;
-	private List<Orario> listaOrari;
+	private ArrayList<Orario> listaOrari;
 	
 	public Professore(){
 		listaOrari = new ArrayList<Orario>();
@@ -20,12 +21,22 @@ public class Professore {
 		this.Nome = nome;
 	}
 
-	public List<Orario> getListaOrari() {
+	public ArrayList<Orario> getListaOrari() {
 		return listaOrari;
 	}
 
 	public void setListaOrari(Orario o) {
-		 listaOrari.add(o);
+
+		if(!o.getSOrainizio().equals("07:50") & listaOrari.isEmpty()){
+			Orario orario =  new Orario(null, null, "", "", "", "");
+			listaOrari.add(orario);
+
+			listaOrari.add(o);
+		}else{
+			listaOrari.add(o);
+
+		}
+
 	}
 
 	@Override

@@ -1,10 +1,12 @@
 package parser;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GiornoSettimana {
+public class GiornoSettimana implements Serializable {
 	
 	private Map<String,Classe> listaClassi;
 	private Map<String,Professore> listaProfessori;
@@ -19,7 +21,7 @@ public class GiornoSettimana {
 	}
 	
 	
-	public List<Orario> searchProfessore(String Nome){
+	public ArrayList<Orario> searchProfessore(String Nome){
 		Professore i = listaProfessori.get(Nome);
 		if(i!=null){
 			return i.getListaOrari();
@@ -93,6 +95,7 @@ public class GiornoSettimana {
 				+ listaAule + ", Dayofweek=" + Dayofweek + "]";
 	}
 
+
 	@Override
 	public boolean equals(Object obj) {
 		
@@ -102,10 +105,6 @@ public class GiornoSettimana {
 		return true;
 	}
 
-	
-	
-	
-	
-	
+
 
 }

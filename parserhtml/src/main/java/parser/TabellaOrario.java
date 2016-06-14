@@ -1,6 +1,9 @@
 package parser;
 
+
+
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.jsoup.Jsoup;
@@ -17,16 +23,33 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
-public class TabellaOrario {
+public class TabellaOrario implements Serializable {
 
 	List<GiornoSettimana> orariosettimana;
-	Map<String,List<String>> mapMateriaProf;
+	TreeMap<String,TreeSet<String>> mapMateriaProf;
+	Map<String,List<Orario>> listaOrarioProf;
+	TreeSet<String> ListProf;
+	TreeSet<String> ListAule;
+	TreeSet<String> ListClassi;
 	private String url;
 
 	
-	public TabellaOrario(){
+	public TabellaOrario(String url){
+		listaOrarioProf = new HashMap<String,List<Orario>>();
 		orariosettimana = new ArrayList<GiornoSettimana>();
-		mapMateriaProf = new HashMap<String, List<String>>();
+		mapMateriaProf = new TreeMap<String, TreeSet<String>>();
+		TreeSet<String> lp = new TreeSet<String>();
+		lp.add("");
+		mapMateriaProf.put("",lp );
+		ListProf = new TreeSet<String>();
+		ListProf.add(" ");
+		ListAule = new TreeSet<String>();
+		ListAule.add(" ");
+
+		ListClassi = new TreeSet<String>();
+		ListClassi.add(" ");
+
+		this.url = url;
 	}
 
 
@@ -76,11 +99,22 @@ public class TabellaOrario {
 
 
 			parserProfPage(mapprofurl);
+			//fix();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	private void fix() {
+		if(!orariosettimana.isEmpty()){
+			for (GiornoSettimana gs :orariosettimana) {
+
+
+			}
+		}
+
 	}
 
 	private  void parserProfPage(Map<String, String> mapprofurl) throws IOException {
@@ -155,7 +189,15 @@ public class TabellaOrario {
 									
 									
 									Classe classed = day.getListaClassi(classe);
+
+									if(!ListClassi.contains(classe)){
+										ListClassi.add(classe);
+									}
+
 									Professore f = day.getProf(nomeprof);
+									if(!ListProf.contains(nomeprof)){
+										ListProf.add(nomeprof);
+									}
 									setMapMateriaProf(materia,f.getNome());
 									Orario orario = null;
 									if(numaula.length>1){
@@ -164,6 +206,9 @@ public class TabellaOrario {
 											orario =  new Orario(d1, finale, string, nomeprof, classe, materia);
 											Aula a = day.getAula(string);
 											a.setListaOrari(orario);
+											if(!ListAule.contains(string)){
+												ListAule.add(string);
+											}
 											
 										}
 										
@@ -171,10 +216,13 @@ public class TabellaOrario {
 										orario =  new Orario(d1, finale, aula, nomeprof, classe, materia);
 										Aula a = day.getAula(aula);
 										a.setListaOrari(orario);
+										if(!ListAule.contains(aula)){
+											ListAule.add(aula);
+										}
 										
 									}
 									classed.setListaOrari(orario);
-									
+
 									f.setListaOrari(orario);
 
 								}
@@ -187,9 +235,9 @@ public class TabellaOrario {
 
 				}
 				
-			/*if(o==0)
-					break;
-				o++;*/
+			//if(o==7)
+			//		break;
+				o++;
 			}
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
@@ -204,9 +252,11 @@ public class TabellaOrario {
 
 	private void setMapMateriaProf(String materia, String f) {
 		if(mapMateriaProf.containsKey(materia)){
-			mapMateriaProf.get(materia).add(f);
+			if(!mapMateriaProf.get(materia).contains(f)) {
+				mapMateriaProf.get(materia).add(f);
+			}
 		}else{
-			List<String> lp = new ArrayList<String>();
+			TreeSet<String> lp = new TreeSet<String>();
 			lp.add(f);
 			mapMateriaProf.put(materia,lp );
 		}
@@ -291,8 +341,8 @@ public class TabellaOrario {
 
 	}
 
-	public  List<Orario> SearchbyProf(String string, int i) {
-		List<Orario> LOrario = new ArrayList<Orario>();
+	public  ArrayList<Orario> SearchbyProf(String string, int i) {
+		ArrayList<Orario> LOrario = new ArrayList<Orario>();
 		for(GiornoSettimana gs  : orariosettimana){
 			if(gs.getDayofweek()==i){
 				LOrario = gs.searchProfessore(string);
@@ -332,25 +382,25 @@ public class TabellaOrario {
 
 	}
 
-	private  String getGiorno(int num){
+	public  String getGiorno(int num){
 		switch (num) {
 		case 1:
-			return "LUN";
+			return "LUNEDI";
 
 		case 2:
-			return "MAR";
+			return "MARTEDI";
 
 		case 3:
-			return "MER";
+			return "MERCOLEDI";
 
 		case 4:
-			return "GIO";
+			return "GIOVEDI";
 
 		case 5:
-			return "VEN";
+			return "VENERDI";
 
 		case 6:
-			return "SAB";
+			return "SABATO";
 
 		default:
 			break;
@@ -363,7 +413,24 @@ public class TabellaOrario {
 
 	}
 
+	public TreeSet<String> getProfessori(){
+		return ListProf;
+	}
 
+	public ArrayList<String> getClassi(){
+		return new ArrayList<String>(ListClassi);
+	}
+
+	public ArrayList<String> getAule(){
+		return new ArrayList<String>(ListAule);
+	}
+
+	public TreeSet<String> getProfessoriformMateria(String Materia){
+		if(mapMateriaProf.containsKey(Materia)){
+			return mapMateriaProf.get(Materia);
+		}
+		return new TreeSet<String>();
+	}
 
 	public Set<String> getMaterie() {
 		
