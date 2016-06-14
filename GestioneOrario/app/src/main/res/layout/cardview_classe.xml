@@ -33,14 +33,16 @@
             android:paddingRight="10dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/profcard"
-            android:layout_toRightOf="@id/classecard"
-            android:layout_alignParentTop="true"
             android:textSize="20sp"
             android:text="MERLINI FRANCESCA"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:layout_alignTop="@+id/aula_card"
+            android:layout_alignStart="@+id/ora_inizio"
+            android:layout_alignEnd="@+id/ora_fine" />
 
         <TextView
             android:layout_width="wrap_content"
