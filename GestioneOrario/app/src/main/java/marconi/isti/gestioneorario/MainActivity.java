@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.MenuItemCompat;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -37,6 +39,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import java.util.Calendar;
 import java.util.Set;
 
 import parser.Orario;
@@ -47,12 +50,24 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private TabellaOrario tb;
+    private MenuItem miActionProgressItem;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Store instance of the menu item containing progress
+        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+        // Extract the action-view from the menu item
+        ProgressBar v =  (ProgressBar) MenuItemCompat.getActionView(miActionProgressItem);
+        // Return to finish
+        return super.onPrepareOptionsMenu(menu);
+    }
+    
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +118,14 @@ public class MainActivity extends AppCompatActivity
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+        Spinner giorno = (Spinner) findViewById(R.id.spinnerGiorno);
+        giorno.setSelection(day-2);
+
+
+
     }
 
     private void aggiornaElement() {
@@ -118,6 +141,10 @@ public class MainActivity extends AppCompatActivity
                 View v = findViewById(R.id.spinnerMateria);
                 Snackbar.make(v, "Download Completato", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                if(miActionProgressItem!=null) {
+                    miActionProgressItem.setVisible(false);
+                }
 
             }
         });
@@ -215,11 +242,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+       /* if (id == R.id.action_settings) {
             Intent i = new Intent(MainActivity.this, ActivitySetting.class);
             startActivity(i);
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -260,6 +287,8 @@ public class MainActivity extends AppCompatActivity
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // Write your code here to execute after dialog
+
+                            miActionProgressItem.setVisible(true);
                             readAndSaveData();
 
                           /*  Toast.makeText(getApplicationContext(),
