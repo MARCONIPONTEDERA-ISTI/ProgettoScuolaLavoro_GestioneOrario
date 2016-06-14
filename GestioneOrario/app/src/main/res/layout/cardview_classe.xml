@@ -24,6 +24,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="16dp"
+            android:textAlignment="center"
             android:text="3AMM" />
 
         <TextView

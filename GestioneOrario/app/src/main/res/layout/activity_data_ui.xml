@@ -40,7 +40,8 @@
         android:text="P2"
         android:id="@+id/radioButtonP1"
         android:layout_below="@+id/giorno_ricerca"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:clickable="false" />
 
     <RadioButton
         android:layout_width="wrap_content"
@@ -48,7 +49,8 @@
         android:text="P1"
         android:id="@+id/radioButtonP2"
         android:layout_below="@+id/radioButtonP1"
-        android:layout_alignStart="@+id/radioButtonP1" />
+        android:layout_alignStart="@+id/radioButtonP1"
+        android:clickable="false" />
 
     <RadioButton
         android:layout_width="wrap_content"
@@ -56,19 +58,20 @@
         android:text="P0"
         android:id="@+id/radioButtonPT"
         android:layout_below="@+id/radioButtonP2"
-        android:layout_alignStart="@+id/radioButtonP2" />
+        android:layout_alignStart="@+id/radioButtonP2"
+        android:clickable="false" />
     </RadioGroup>
 
 
     <marconi.isti.gestioneorario.TouchImageView
         android:layout_width="310dp"
-        android:layout_height="250dp"
+        android:layout_height="290dp"
         android:id="@+id/imageView2"
-        android:src="@drawable/disegno"
+        android:src="@drawable/primopianomarconi"
         android:adjustViewBounds="true"
         android:scaleType="matrix"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tiporicerca"/>
+        android:layout_below="@+id/giornoricerca"
+        android:layout_alignParentStart="true" />
 
 
     <View

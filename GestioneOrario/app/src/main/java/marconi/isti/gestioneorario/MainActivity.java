@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -18,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.CheckedTextView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -127,28 +129,28 @@ public class MainActivity extends AppCompatActivity
             Spinner pinner = (Spinner) findViewById(R.id.spinnerMateria);
             Context c = (Context) getApplicationContext();
             ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(c, R.layout.spinnercustom, new ArrayList<String>(materie)); //selected item will look like a spinner set from XML
-            spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
             pinner.setAdapter(spinnerArrayAdapter);
 
             //Prof
             ArrayList<String> professori = tb.getProfessori();
             Spinner pinnerf = (Spinner) findViewById(R.id.spinnerProf);
             ArrayAdapter<String> spinnerfArrayAdapter = new ArrayAdapter<String>(c,R.layout.spinnercustom, professori); //selected item will look like a spinner set from XML
-            spinnerfArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerfArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
             pinnerf.setAdapter(spinnerfArrayAdapter);
 
             //Aule
             ArrayList<String> aule = tb.getAule();
             Spinner pinnera = (Spinner) findViewById(R.id.spinnerAula);
             ArrayAdapter<String> spinneraArrayAdapter = new ArrayAdapter<String>(c, R.layout.spinnercustom, aule); //selected item will look like a spinner set from XML
-            spinneraArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinneraArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
             pinnera.setAdapter(spinneraArrayAdapter);
 
             //Classi
             ArrayList<String> classi = tb.getClassi();
             Spinner pinnerc = (Spinner) findViewById(R.id.spinnerClasse);
             ArrayAdapter<String> spinnercArrayAdapter = new ArrayAdapter<String>(c,R.layout.spinnercustom, classi); //selected item will look like a spinner set from XML
-            spinnercArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnercArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
             pinnerc.setAdapter(spinnercArrayAdapter);
 
 
