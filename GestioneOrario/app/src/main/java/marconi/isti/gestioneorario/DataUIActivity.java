@@ -66,12 +66,68 @@ public class DataUIActivity extends AppCompatActivity {
         prima.setOnCheckedChangeListener(ltb);
         seconda.setOnCheckedChangeListener(ltb);
         terza.setOnCheckedChangeListener(ltb);
+      /*  terza.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    buttonView.getId();
+
+
+                    RecyclerView rv = (RecyclerView)findViewById(R.id.cardList);
+                    LinearLayoutManager llm = ((LinearLayoutManager) rv.getLayoutManager());
+                    ((LinearLayoutManager) rv.getLayoutManager()).smoothScrollToPosition(rv, null, 2);
+
+                }
+            }
+            });*/
         quarta.setOnCheckedChangeListener(ltb);
         quinta.setOnCheckedChangeListener(ltb);
         sesta.setOnCheckedChangeListener(ltb);
 
         if(lo!=null) {
             OrarioAdapter adapter = new OrarioAdapter(lo);
+
+
+            rv.addOnScrollListener(new RecyclerView.OnScrollListener()
+            {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+                {
+                    super.onScrolled(recyclerView, dx, dy);
+                    int firstVisibleItem = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+
+                    if(firstVisibleItem >= 0) //check for scroll down
+                    {
+                        Activity t = (Activity) recyclerView.getContext();
+                        List<ToggleButton> ltb  = new ArrayList<ToggleButton>();
+                        ToggleButton prima = (ToggleButton)t.findViewById(R.id.buttonO1);
+                        ltb.add(prima);
+                        ToggleButton seconda = (ToggleButton)t.findViewById(R.id.buttonO2);
+                        ltb.add(seconda);
+                        ToggleButton terza = (ToggleButton) t.findViewById(R.id.buttonO3);
+                        ltb.add(terza);
+                        ToggleButton quarta = (ToggleButton) t.findViewById(R.id.buttonO4);
+                        ltb.add(quarta);
+                        ToggleButton quinta = (ToggleButton) t.findViewById(R.id.buttonO5);
+                        ltb.add(quinta);
+                        ToggleButton sesta = (ToggleButton) t.findViewById(R.id.buttonO6);
+                        ltb.add(sesta);
+
+                        int ora = 0;
+                        for( ToggleButton s: ltb){
+                            if(firstVisibleItem==ora){
+                                if(!s.isChecked()) {
+                                    s.setChecked(true);
+                                }
+                            }else{
+                                s.setChecked(false);
+                            }
+                            ora++;
+                        }
+
+                    }
+                }
+            });
 
             adapter.setMyClickListener(new MyClickListener() {
                 @Override
@@ -127,11 +183,11 @@ public class DataUIActivity extends AppCompatActivity {
 
 
 
-    @Override
+  /*  @Override
     public boolean onTouchEvent(MotionEvent ev) {
         scaleGestureDetector.onTouchEvent(ev);
         return true;
-    }
+    }*/
 
   /*  private class ScaleListener extends ScaleGestureDetector.
             SimpleOnScaleGestureListener {

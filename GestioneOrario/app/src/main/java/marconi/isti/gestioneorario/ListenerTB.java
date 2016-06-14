@@ -3,6 +3,8 @@ package marconi.isti.gestioneorario;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -24,6 +26,46 @@ public class ListenerTB  implements CompoundButton.OnCheckedChangeListener {
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+
+        Activity t = (Activity) buttonView.getContext();
+
+
+            List<ToggleButton> ltb  = new ArrayList<ToggleButton>();
+            ToggleButton prima = (ToggleButton)t.findViewById(R.id.buttonO1);
+            ltb.add(prima);
+            ToggleButton seconda = (ToggleButton)t.findViewById(R.id.buttonO2);
+            ltb.add(seconda);
+            ToggleButton terza = (ToggleButton) t.findViewById(R.id.buttonO3);
+            ltb.add(terza);
+            ToggleButton quarta = (ToggleButton) t.findViewById(R.id.buttonO4);
+            ltb.add(quarta);
+            ToggleButton quinta = (ToggleButton) t.findViewById(R.id.buttonO5);
+            ltb.add(quinta);
+            ToggleButton sesta = (ToggleButton) t.findViewById(R.id.buttonO6);
+            ltb.add(sesta);
+
+            int ora = 0;
+            for( ToggleButton s: ltb){
+                if(buttonView.getId()==s.getId()){
+                    if(isChecked) {
+                        ora = Integer.parseInt(s.getText().toString().trim());
+                        RecyclerView rv = (RecyclerView) t.findViewById(R.id.cardList);
+                        LinearLayoutManager llm = ((LinearLayoutManager) rv.getLayoutManager());
+                        ((LinearLayoutManager) rv.getLayoutManager()).smoothScrollToPosition(rv, null, ora - 1);
+                    }
+                }else{
+                    s.setChecked(false);
+                }
+            }
+
+
+
+
+
+
+
+
 
       /*  Activity t = (Activity) buttonView.getContext();
         TextView tv = (TextView) t.findViewById(R.id.info_text);

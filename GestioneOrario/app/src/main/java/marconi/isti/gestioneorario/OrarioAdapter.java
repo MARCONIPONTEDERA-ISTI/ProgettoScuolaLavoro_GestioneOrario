@@ -3,6 +3,7 @@ package marconi.isti.gestioneorario;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -51,7 +52,7 @@ public class OrarioAdapter extends RecyclerView.Adapter<OrarioAdapter.OrarioView
         holder.inizio.setText(lorario.get(position).getSOrainizio());
         holder.fine.setText(lorario.get(position).getSOrafine());
         holder.aula.setText(lorario.get(position).getAula());
-
+        //holder.onClick(holder.i);
 
     }
 
@@ -69,7 +70,7 @@ public class OrarioAdapter extends RecyclerView.Adapter<OrarioAdapter.OrarioView
         TextView fine;
         TextView classe;
         TextView aula;
-
+        View i;
         List<Orario> lorario;
 
 
@@ -83,13 +84,19 @@ public class OrarioAdapter extends RecyclerView.Adapter<OrarioAdapter.OrarioView
             fine = (TextView)itemView.findViewById(R.id.ora_fine);
             classe = (TextView)itemView.findViewById(R.id.classecard);
             aula = (TextView)itemView.findViewById(R.id.aula_card);
+            i=itemView;
             itemView.setOnClickListener(this);
+
         }
 
         @Override
         public void onClick(View view) {
             myClickListener.onItemClick(getAdapterPosition(), view);
         }
+
+
+
+
     }
 
 
