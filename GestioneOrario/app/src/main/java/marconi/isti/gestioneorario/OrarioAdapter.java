@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -79,6 +80,12 @@ public class OrarioAdapter extends RecyclerView.Adapter<OrarioAdapter.OrarioView
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.card_view);
             profcard = (TextView)itemView.findViewById(R.id.profcard);
+            profcard.setOnLongClickListener(new View.OnLongClickListener(){
+               public boolean onLongClick(View var1){
+
+                   return true;
+                }
+            });
             materiacard = (TextView)itemView.findViewById(R.id.materiacard);
             inizio = (TextView)itemView.findViewById(R.id.ora_inizio);
             fine = (TextView)itemView.findViewById(R.id.ora_fine);

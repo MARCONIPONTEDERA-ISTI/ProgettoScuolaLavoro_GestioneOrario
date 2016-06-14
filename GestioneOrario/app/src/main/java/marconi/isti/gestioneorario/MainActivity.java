@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.ProgressBar;
@@ -40,7 +41,9 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import parser.Orario;
 
@@ -164,10 +167,44 @@ public class MainActivity extends AppCompatActivity
             spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
             pinner.setAdapter(spinnerArrayAdapter);
 
+            pinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    String materiaselezionata = adapterView.getItemAtPosition(i).toString();
+                    TreeSet<String> professori;
+                    Spinner pinnerc = (Spinner) findViewById(R.id.spinnerClasse);
+                    Spinner pinnera = (Spinner) findViewById(R.id.spinnerAula);
+                    if(materiaselezionata.length()>1) {
+                       professori = tb.getProfessoriformMateria(materiaselezionata);
+
+                        pinnera.setEnabled(false);
+
+                        pinnerc.setEnabled(false);
+                    }else{
+                        professori  = tb.getProfessori();
+                        pinnera.setEnabled(true);
+
+                        pinnerc.setEnabled(true);
+                    }
+                    Spinner pinnerf = (Spinner) findViewById(R.id.spinnerProf);
+
+                    ArrayAdapter<String> spinnerfArrayAdapter = new ArrayAdapter<String>(view.getContext(), R.layout.spinnercustom, new ArrayList<String>(professori)); //selected item will look like a spinner set from XML
+                    spinnerfArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+                    pinnerf.setAdapter(spinnerfArrayAdapter);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
+
             //Prof
-            ArrayList<String> professori = tb.getProfessori();
+            TreeSet<String> professori = tb.getProfessori();
             Spinner pinnerf = (Spinner) findViewById(R.id.spinnerProf);
-            ArrayAdapter<String> spinnerfArrayAdapter = new ArrayAdapter<String>(c,R.layout.spinnercustom, professori); //selected item will look like a spinner set from XML
+            ArrayAdapter<String> spinnerfArrayAdapter = new ArrayAdapter<String>(c,R.layout.spinnercustom, new  ArrayList<String>(professori)); //selected item will look like a spinner set from XML
             spinnerfArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
             pinnerf.setAdapter(spinnerfArrayAdapter);
 
@@ -177,6 +214,34 @@ public class MainActivity extends AppCompatActivity
             ArrayAdapter<String> spinneraArrayAdapter = new ArrayAdapter<String>(c, R.layout.spinnercustom, aule); //selected item will look like a spinner set from XML
             spinneraArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
             pinnera.setAdapter(spinneraArrayAdapter);
+            pinnera.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    String selezionata = adapterView.getItemAtPosition(i).toString();
+
+                    Spinner pinnerc = (Spinner) findViewById(R.id.spinnerClasse);
+                    Spinner pinnerf = (Spinner) findViewById(R.id.spinnerProf);
+                    Spinner pinner = (Spinner) findViewById(R.id.spinnerMateria);
+                    if(selezionata.length()>1) {
+                        pinnerc.setEnabled(false);
+                        pinnerf.setEnabled(false);
+                        pinner.setEnabled(false);
+                    }else{
+                        pinnerc.setEnabled(true);
+                        pinnerf.setEnabled(true);
+                        pinner.setEnabled(true);
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+
+            });
 
             //Classi
             ArrayList<String> classi = tb.getClassi();
@@ -184,6 +249,36 @@ public class MainActivity extends AppCompatActivity
             ArrayAdapter<String> spinnercArrayAdapter = new ArrayAdapter<String>(c,R.layout.spinnercustom, classi); //selected item will look like a spinner set from XML
             spinnercArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
             pinnerc.setAdapter(spinnercArrayAdapter);
+            pinnerc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    String selezionata = adapterView.getItemAtPosition(i).toString();
+
+
+                    Spinner pinnerf = (Spinner) findViewById(R.id.spinnerProf);
+                    Spinner pinnera = (Spinner) findViewById(R.id.spinnerAula);
+                    Spinner pinner = (Spinner) findViewById(R.id.spinnerMateria);
+                    if(selezionata.length()>1) {
+                        pinnerf.setEnabled(false);
+                        pinnera.setEnabled(false);
+                        pinner.setEnabled(false);
+                    }else{
+                        pinnerf.setEnabled(true);
+                        pinnera.setEnabled(true);
+                        pinner.setEnabled(true);
+
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+
+            });
 
 
 
@@ -203,7 +298,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void goToDATAUI(View v) {
-        Spinner materia = (Spinner)findViewById(R.id.spinnerMateria);
+       // Spinner materia = (Spinner)findViewById(R.id.spinnerMateria);
         Spinner prof = (Spinner)findViewById(R.id.spinnerProf);
         Spinner aula = (Spinner) findViewById(R.id.spinnerAula);
         Spinner classe = (Spinner) findViewById(R.id.spinnerClasse);
@@ -212,17 +307,34 @@ public class MainActivity extends AppCompatActivity
 
 
         Intent i = new Intent(MainActivity.this, DataUIActivity.class);
+        int g = giorno.getSelectedItemPosition();
         if(tb!=null){
-            int g = giorno.getSelectedItemPosition();
-            String pf = prof.getSelectedItem().toString();
 
-            ArrayList<Orario> lo = tb.SearchbyProf(pf,g+1);
-            i.putExtra("ListaOrari", lo);
-            i.putExtra("giorno",tb.getGiorno(g+1));
-            i.putExtra("tipo",pf);
+            String pf = prof.getSelectedItem().toString();
+            if(prof.isEnabled()) {
+                ArrayList<Orario> lo = tb.SearchbyProf(pf, g + 1);
+                i.putExtra("ListaOrari", lo);
+                i.putExtra("tipo", pf);
+            }else
+
+
+            if(aula.isEnabled()){
+                String au = aula.getSelectedItem().toString();
+                List<Orario> lo = tb.SearchbyAula(au, g + 1);
+                i.putExtra("ListaOrari",new ArrayList<Orario>(lo));
+                i.putExtra("tipo", au);
+            }else
+
+
+            if(aula.isEnabled()){
+                String cla = classe.getSelectedItem().toString();
+                List<Orario> lo = tb.SearchbyClasse(cla, g + 1);
+                i.putExtra("ListaOrari",new ArrayList<Orario>(lo));
+                i.putExtra("tipo", cla);
+            }
         }
 
-
+        i.putExtra("giorno", tb.getGiorno(g + 1));
         startActivity(i);
     }
 
