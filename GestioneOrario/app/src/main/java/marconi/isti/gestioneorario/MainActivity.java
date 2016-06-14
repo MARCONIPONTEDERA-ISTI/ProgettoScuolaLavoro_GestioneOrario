@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-        aggiornaElement();
+        aggiornaElement(false);
 
       /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void aggiornaElement() {
+    private void aggiornaElement(final boolean flag) {
 
         runOnUiThread(new Runnable() {
             @Override
@@ -141,10 +141,15 @@ public class MainActivity extends AppCompatActivity
               /*  Toast.makeText(getApplicationContext(),
                         "Download Completato", Toast.LENGTH_SHORT)
                         .show();*/
-                View v = findViewById(R.id.spinnerMateria);
-                Snackbar.make(v, "Download Completato", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                String text = "";
+                if(flag)
+                    text  = "Download Completato";
+                else
+                    text   = "Caricamento Completato";
 
+                View v = findViewById(R.id.spinnerMateria);
+                Snackbar.make(v, text, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
                 if(miActionProgressItem!=null) {
                     miActionProgressItem.setVisible(false);
                 }
@@ -516,7 +521,7 @@ public class MainActivity extends AppCompatActivity
 
             tb = new TabellaOrario("http://www.marconipontedera.it/dcb/doceboCore/orario/index.html");
             tb.read();
-            aggiornaElement();
+            aggiornaElement(true);
 
 
             FileOutputStream stream = null;

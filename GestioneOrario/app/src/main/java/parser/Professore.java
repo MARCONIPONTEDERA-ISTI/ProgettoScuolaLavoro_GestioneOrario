@@ -26,7 +26,17 @@ public class Professore implements Serializable {
 	}
 
 	public void setListaOrari(Orario o) {
-		 listaOrari.add(o);
+
+		if(!o.getSOrainizio().equals("07:50") & listaOrari.isEmpty()){
+			Orario orario =  new Orario(null, null, "", "", "", "");
+			listaOrari.add(orario);
+
+			listaOrari.add(o);
+		}else{
+			listaOrari.add(o);
+
+		}
+
 	}
 
 	@Override

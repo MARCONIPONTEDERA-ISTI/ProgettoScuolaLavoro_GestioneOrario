@@ -95,6 +95,7 @@ public class GiornoSettimana implements Serializable {
 				+ listaAule + ", Dayofweek=" + Dayofweek + "]";
 	}
 
+
 	@Override
 	public boolean equals(Object obj) {
 		
@@ -104,10 +105,6 @@ public class GiornoSettimana implements Serializable {
 		return true;
 	}
 
-	
-	
-	
-	
-	
+
 
 }
