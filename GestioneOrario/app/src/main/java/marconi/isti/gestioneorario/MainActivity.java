@@ -2,6 +2,7 @@ package marconi.isti.gestioneorario;
 
 import android.app.AlertDialog;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -110,9 +112,12 @@ public class MainActivity extends AppCompatActivity
             public void run() {
                 // TODO Auto-generated method stub
                 update();
-                Toast.makeText(getApplicationContext(),
+              /*  Toast.makeText(getApplicationContext(),
                         "Download Completato", Toast.LENGTH_SHORT)
-                        .show();
+                        .show();*/
+                View v = findViewById(R.id.spinnerMateria);
+                Snackbar.make(v, "Download Completato", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
 
             }
         });
@@ -242,10 +247,10 @@ public class MainActivity extends AppCompatActivity
             AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(this);
 
 // Setting Dialog Title
-            alertDialog2.setTitle("Confirm Update Data...");
+            alertDialog2.setTitle("Confermi l'aggiornamento dei dati...");
 
 // Setting Dialog Message
-            alertDialog2.setMessage("Are you sure you want update data?");
+            alertDialog2.setMessage("questo potrebbe richiedere alcuni minuti");
 
 // Setting Icon to Dialog
             //   alertDialog2.setIcon(R.drawable.delete);
@@ -256,9 +261,10 @@ public class MainActivity extends AppCompatActivity
                         public void onClick(DialogInterface dialog, int which) {
                             // Write your code here to execute after dialog
                             readAndSaveData();
-                            Toast.makeText(getApplicationContext(),
+
+                          /*  Toast.makeText(getApplicationContext(),
                                     "You clicked on YES", Toast.LENGTH_SHORT)
-                                    .show();
+                                    .show();*/
                         }
                     });
 
@@ -338,9 +344,12 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public void run() {
+
+
             tb = new TabellaOrario("http://www.marconipontedera.it/dcb/doceboCore/orario/index.html");
             tb.read();
             aggiornaElement();
+
 
             FileOutputStream stream = null;
             try {
