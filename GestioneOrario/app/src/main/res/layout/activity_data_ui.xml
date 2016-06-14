@@ -32,15 +32,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@id/tipo_ricerca"
-        android:layout_below="@+id/tipo_ricerca" >
+        android:layout_below="@id/tipo_ricerca" >
 
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="P2"
         android:id="@+id/radioButtonP1"
-        android:layout_below="@+id/giorno_ricerca"
-        android:layout_alignParentEnd="true"
+
+
         android:clickable="false" />
 
     <RadioButton
@@ -48,8 +48,7 @@
         android:layout_height="wrap_content"
         android:text="P1"
         android:id="@+id/radioButtonP2"
-        android:layout_below="@+id/radioButtonP1"
-        android:layout_alignStart="@+id/radioButtonP1"
+
         android:clickable="false" />
 
     <RadioButton
@@ -57,8 +56,7 @@
         android:layout_height="wrap_content"
         android:text="P0"
         android:id="@+id/radioButtonPT"
-        android:layout_below="@+id/radioButtonP2"
-        android:layout_alignStart="@+id/radioButtonP2"
+
         android:clickable="false" />
     </RadioGroup>
 
@@ -87,7 +85,7 @@
         android:textOn="1"
         android:textOff="1"
         android:id="@+id/buttonO1"
-        android:layout_below="@+id/SplitLine_hor1"
+        android:layout_below="@id/SplitLine_hor1"
         android:layout_alignParentStart="true" />
 
     <ToggleButton
@@ -96,8 +94,8 @@
         android:textOn="2"
         android:textOff="2"
         android:id="@+id/buttonO2"
-        android:layout_below="@+id/SplitLine_hor1"
-        android:layout_toEndOf="@+id/buttonO1"
+        android:layout_below="@id/SplitLine_hor1"
+        android:layout_toEndOf="@id/buttonO1"
         android:singleLine="false" />
 
     <ToggleButton
@@ -107,8 +105,8 @@
         android:textOff="3"
         android:id="@+id/buttonO3"
         android:singleLine="false"
-        android:layout_below="@+id/SplitLine_hor1"
-        android:layout_toEndOf="@+id/buttonO2" />
+        android:layout_below="@id/SplitLine_hor1"
+        android:layout_toEndOf="@id/buttonO2" />
 
     <ToggleButton
         android:layout_width="55dp"
@@ -117,8 +115,8 @@
         android:textOff="4"
         android:id="@+id/buttonO4"
         android:singleLine="false"
-        android:layout_below="@+id/SplitLine_hor1"
-        android:layout_toEndOf="@+id/buttonO3" />
+        android:layout_below="@id/SplitLine_hor1"
+        android:layout_toEndOf="@id/buttonO3" />
 
     <ToggleButton
         android:layout_width="55dp"
@@ -127,8 +125,8 @@
         android:textOff="5"
         android:id="@+id/buttonO5"
         android:singleLine="false"
-        android:layout_below="@+id/SplitLine_hor1"
-        android:layout_toEndOf="@+id/buttonO4" />
+        android:layout_below="@id/SplitLine_hor1"
+        android:layout_toEndOf="@id/buttonO4" />
 
     <ToggleButton
         android:layout_width="55dp"
@@ -137,15 +135,15 @@
         android:textOff="6"
         android:id="@+id/buttonO6"
         android:singleLine="false"
-        android:layout_below="@+id/SplitLine_hor1"
-        android:layout_toEndOf="@+id/buttonO5" />
+        android:layout_below="@id/SplitLine_hor1"
+        android:layout_toEndOf="@id/buttonO5" />
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cardList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/buttonO6"
+        android:layout_below="@id/buttonO6"
         />
 
 

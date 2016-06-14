@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/profcard"
-            android:layout_toRightOf="@+id/classecard"
+            android:layout_toRightOf="@id/classecard"
             android:layout_alignParentTop="true"
             android:textSize="20sp"
             android:text="MERLINI FRANCESCA"
@@ -49,15 +49,15 @@
             android:textStyle="bold"
             android:layout_below="@+id/profcard"
             android:text="ELETTROT. ED ELE."
-            android:layout_toRightOf="@+id/classecard"
+            android:layout_toRightOf="@id/classecard"
             android:layout_marginLeft="15dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/ora_inizio"
-            android:layout_toRightOf="@+id/classecard"
-            android:layout_below="@+id/materiacard"
+            android:layout_toRightOf="@id/classecard"
+            android:layout_below="@id/materiacard"
             android:text="00:00"
             android:layout_marginLeft="10dp" />
 
@@ -66,8 +66,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/ora_fine"
             android:text="00:00"
-            android:layout_below="@+id/materiacard"
-            android:layout_alignEnd="@+id/profcard" />
+            android:layout_below="@id/materiacard"
+            android:layout_alignEnd="@id/profcard" />
 
         <TextView
             android:layout_width="wrap_content"

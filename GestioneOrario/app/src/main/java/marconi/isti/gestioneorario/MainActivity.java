@@ -207,6 +207,34 @@ public class MainActivity extends AppCompatActivity
             ArrayAdapter<String> spinnerfArrayAdapter = new ArrayAdapter<String>(c,R.layout.spinnercustom, new  ArrayList<String>(professori)); //selected item will look like a spinner set from XML
             spinnerfArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
             pinnerf.setAdapter(spinnerfArrayAdapter);
+            pinnerf.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    String selezionata = adapterView.getItemAtPosition(i).toString();
+
+                    Spinner pinnerc = (Spinner) findViewById(R.id.spinnerClasse);
+                    Spinner pinnerf = (Spinner) findViewById(R.id.spinnerAula);
+                    Spinner pinner = (Spinner) findViewById(R.id.spinnerMateria);
+                    if(selezionata.length()>1) {
+                        pinnerc.setEnabled(false);
+                        pinnerf.setEnabled(false);
+                        pinner.setEnabled(false);
+                    }else{
+                        pinnerc.setEnabled(true);
+                        pinnerf.setEnabled(true);
+                        pinner.setEnabled(true);
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+
+            });
 
             //Aule
             ArrayList<String> aule = tb.getAule();
@@ -298,44 +326,43 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void goToDATAUI(View v) {
-       // Spinner materia = (Spinner)findViewById(R.id.spinnerMateria);
-        Spinner prof = (Spinner)findViewById(R.id.spinnerProf);
-        Spinner aula = (Spinner) findViewById(R.id.spinnerAula);
-        Spinner classe = (Spinner) findViewById(R.id.spinnerClasse);
-        Spinner giorno = (Spinner) findViewById(R.id.spinnerGiorno);
+        try {
+            // Spinner materia = (Spinner)findViewById(R.id.spinnerMateria);
+            Spinner prof = (Spinner) findViewById(R.id.spinnerProf);
+            Spinner aula = (Spinner) findViewById(R.id.spinnerAula);
+            Spinner classe = (Spinner) findViewById(R.id.spinnerClasse);
+            Spinner giorno = (Spinner) findViewById(R.id.spinnerGiorno);
 
 
+            Intent i = new Intent(MainActivity.this, DataUIActivity.class);
+            int g = giorno.getSelectedItemPosition();
+            if (tb != null) {
 
-        Intent i = new Intent(MainActivity.this, DataUIActivity.class);
-        int g = giorno.getSelectedItemPosition();
-        if(tb!=null){
-
-            String pf = prof.getSelectedItem().toString();
-            if(prof.isEnabled()) {
-                ArrayList<Orario> lo = tb.SearchbyProf(pf, g + 1);
-                i.putExtra("ListaOrari", lo);
-                i.putExtra("tipo", pf);
-            }else
-
-
-            if(aula.isEnabled()){
-                String au = aula.getSelectedItem().toString();
-                List<Orario> lo = tb.SearchbyAula(au, g + 1);
-                i.putExtra("ListaOrari",new ArrayList<Orario>(lo));
-                i.putExtra("tipo", au);
-            }else
-
-
-            if(aula.isEnabled()){
-                String cla = classe.getSelectedItem().toString();
-                List<Orario> lo = tb.SearchbyClasse(cla, g + 1);
-                i.putExtra("ListaOrari",new ArrayList<Orario>(lo));
-                i.putExtra("tipo", cla);
+                String pf = prof.getSelectedItem().toString();
+                if (prof.isEnabled()) {
+                    ArrayList<Orario> lo = tb.SearchbyProf(pf, g + 1);
+                    i.putExtra("ListaOrari", lo);
+                    i.putExtra("tipo", pf);
+                } else if (aula.isEnabled()) {
+                    String au = aula.getSelectedItem().toString();
+                    ArrayList<Orario> lo =(ArrayList<Orario>) tb.SearchbyAula(au, g + 1);
+                    i.putExtra("ListaOrari", lo);
+                    i.putExtra("tipo", au);
+                } else if (classe.isEnabled()) {
+                    String cla = classe.getSelectedItem().toString(); //au+" "+lo.size()
+                    ArrayList<Orario> lo =(ArrayList<Orario>) tb.SearchbyClasse(cla, g + 1);
+                    i.putExtra("ListaOrari", lo);
+                    i.putExtra("tipo", cla);
+                }
             }
-        }
 
-        i.putExtra("giorno", tb.getGiorno(g + 1));
-        startActivity(i);
+            i.putExtra("giorno", tb.getGiorno(g + 1));
+            startActivity(i);
+        }catch (Exception e){
+            //TODO:
+            Snackbar.make(v,e.getMessage() , Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
     }
 
 
