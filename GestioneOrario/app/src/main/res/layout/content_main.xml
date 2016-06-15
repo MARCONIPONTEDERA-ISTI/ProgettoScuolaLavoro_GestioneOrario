@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerProf"
-
+        android:paddingBottom="15dp"
         android:spinnerMode="dropdown"
         android:layout_below="@+id/textView3"
         android:layout_alignParentStart="true" />
@@ -51,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_below="@+id/spinnerProf"
         android:layout_height= "2dp"
+
         android:background="@color/colorPrimary" />
 
 
@@ -58,6 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Seleziona Aula"
+        android:paddingTop="15dp"
         android:id="@+id/textView4"
         android:textSize="@dimen/abc_text_size_body_1_material"
         android:layout_below="@id/SplitLine_hor1"
@@ -68,6 +70,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/spinnerAula"
         android:layout_below="@+id/textView4"
+        android:paddingBottom="15dp"
         android:layout_alignParentStart="true" />
 
     <View
@@ -75,10 +78,12 @@
         android:layout_width="match_parent"
         android:layout_below="@+id/spinnerAula"
         android:layout_height= "2dp"
+
         android:background="@color/colorPrimary" />
 
     <TextView
         android:layout_width="wrap_content"
+        android:paddingTop="15dp"
         android:layout_height="wrap_content"
         android:text="Seleziona Classe"
         android:id="@+id/textView5"
@@ -91,6 +96,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/spinnerClasse"
         android:layout_below="@+id/textView5"
+        android:paddingBottom="15dp"
         android:layout_alignParentStart="true" />
 
 
@@ -99,9 +105,11 @@
         android:layout_width="match_parent"
         android:layout_below="@+id/spinnerClasse"
         android:layout_height= "2dp"
+
         android:background="@color/colorPrimary" />
 
     <TextView
+        android:paddingTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Seleziona Giorno"

@@ -45,6 +45,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import parser.GiornoSettimana;
 import parser.Orario;
 
 import parser.TabellaOrario;
@@ -194,9 +195,11 @@ public class MainActivity extends AppCompatActivity
                     }
                     Spinner pinnerf = (Spinner) findViewById(R.id.spinnerProf);
 
-                    ArrayAdapter<String> spinnerfArrayAdapter = new ArrayAdapter<String>(view.getContext(), R.layout.spinnercustom, new ArrayList<String>(professori)); //selected item will look like a spinner set from XML
-                    spinnerfArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-                    pinnerf.setAdapter(spinnerfArrayAdapter);
+                    if(view!=null) {
+                        ArrayAdapter<String> spinnerfArrayAdapter = new ArrayAdapter<String>(view.getContext(), R.layout.spinnercustom, new ArrayList<String>(professori)); //selected item will look like a spinner set from XML
+                        spinnerfArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+                        pinnerf.setAdapter(spinnerfArrayAdapter);
+                    }
                 }
 
                 @Override
@@ -401,8 +404,17 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.orariocompleto) {
             // Handle the camera action
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.getMenu().findItem(R.id.orariocompleto).setChecked(false);
+
+            Intent i = new Intent(MainActivity.this, OrarioCompleto.class);
+            ArrayList<GiornoSettimana> lo = ( ArrayList<GiornoSettimana>) tb.getListaOrarioSettimana();
+            i.putExtra("OrarioCompleto", lo);
+            startActivity(i);
+
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -410,6 +422,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
+
 
         } else if (id == R.id.nav_setting) {
 

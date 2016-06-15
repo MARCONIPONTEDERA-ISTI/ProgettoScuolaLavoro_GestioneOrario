@@ -104,7 +104,9 @@ public class OrarioAdapter extends RecyclerView.Adapter<OrarioAdapter.OrarioView
 
         @Override
         public void onClick(View view) {
-            myClickListener.onItemClick(getAdapterPosition(), view);
+            if(myClickListener!=null) {
+                myClickListener.onItemClick(getAdapterPosition(), view);
+            }
         }
 
 

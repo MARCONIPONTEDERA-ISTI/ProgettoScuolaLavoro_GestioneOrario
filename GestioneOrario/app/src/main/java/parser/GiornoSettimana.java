@@ -36,7 +36,11 @@ public class GiornoSettimana implements Serializable {
 		}
 		return null;
 	}
-	
+
+	public Map<String, Professore> getListaProfessori() {
+		return listaProfessori;
+	}
+
 	public List<Orario> searchAula(String nome){
 			Aula i = listaAule.get(nome);
 			if(i!=null){
