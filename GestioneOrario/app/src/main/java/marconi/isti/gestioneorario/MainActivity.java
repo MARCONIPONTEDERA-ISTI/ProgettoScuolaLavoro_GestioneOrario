@@ -347,7 +347,7 @@ public class MainActivity extends AppCompatActivity
                 if (prof.isEnabled()) {
                     ArrayList<Orario> lo = tb.SearchbyProf(pf, g + 1);
                     i.putExtra("ListaOrari", lo);
-                    i.putExtra("tipo", "Professore "+pf);
+                    i.putExtra("tipo",pf);
                 } else if (aula.isEnabled()) {
                     String au = aula.getSelectedItem().toString();
                     ArrayList<Orario> lo =(ArrayList<Orario>) tb.SearchbyAula(au, g + 1);
