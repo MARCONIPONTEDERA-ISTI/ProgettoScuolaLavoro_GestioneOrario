@@ -7,7 +7,7 @@
             android:icon="@drawable/clock"
             android:title="Orario Completo" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_pref"
             android:icon="@drawable/ic_star_border_black_24dp"
             android:title="Preferiti" />
         <item
@@ -22,7 +22,7 @@
         <item
             android:id="@+id/nav_setting"
             android:icon="@drawable/ic_settings_black_24dp"
-            android:title="Impostazioni" />
+            android:title="Aggiorna Orario" />
 
     </group>
 

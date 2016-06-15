@@ -62,6 +62,10 @@ public class DataUIActivity extends AppCompatActivity {
         ToggleButton quinta = (ToggleButton) findViewById(R.id.buttonO5);
         ToggleButton sesta = (ToggleButton) findViewById(R.id.buttonO6);
 
+        if(lo!=null)
+        if(!lo.isEmpty())
+            prima.setChecked(true);
+
         ListenerTB ltb = new ListenerTB(lo);
         prima.setOnCheckedChangeListener(ltb);
         seconda.setOnCheckedChangeListener(ltb);

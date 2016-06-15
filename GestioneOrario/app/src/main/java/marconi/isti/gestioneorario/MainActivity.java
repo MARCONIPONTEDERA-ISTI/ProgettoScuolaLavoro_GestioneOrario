@@ -6,10 +6,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.view.View;
@@ -24,6 +26,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -129,7 +132,12 @@ public class MainActivity extends AppCompatActivity
         giorno.setSelection(day-2);
 
 
+        SharedPreferences sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
+        int posClasseSalvata = sharedPref.getInt("Classe", 0);
+
+        Spinner pinnerc = (Spinner) findViewById(R.id.spinnerProf);
+        pinnerc.setSelection(posClasseSalvata);
     }
 
     private void aggiornaElement(final boolean flag) {
@@ -415,7 +423,37 @@ public class MainActivity extends AppCompatActivity
             startActivity(i);
 
 
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_pref) {
+
+            // 1. Instantiate an AlertDialog.Builder with its constructor
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+// 2. Chain together various setter methods to set the dialog characteristics
+            builder.setTitle("Seleziona la tua classe");
+                  //  .setTitle("Salva la tua Classe tra i preferiti");
+            CharSequence[] cs = tb.getClassi().toArray(new CharSequence[tb.getClassi().size()]);
+
+            builder.setItems(cs, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+
+                    SharedPreferences sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putInt("Classe", which);
+                    editor.commit();
+
+                }
+            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    // User cancelled the dialog
+                    dialog.dismiss();
+                }
+            });
+
+// 3. Get the AlertDialog from create()
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.getMenu().findItem(R.id.nav_pref).setChecked(false);
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -424,7 +462,25 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
 
 
-        } else if (id == R.id.nav_setting) {
+        } else if(id == R.id.nav_info){
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.getMenu().findItem(R.id.nav_info).setChecked(false);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+// 2. Chain together various setter methods to set the dialog characteristics
+            builder.setMessage("Applicazione Sviluppata da: "+System.getProperty("line.separator")+" Filippo, Jacopo e Giorgio")
+              .setTitle("Info Applicazione").setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    // User cancelled the dialog
+                    dialog.dismiss();
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+        }  else if (id == R.id.nav_setting) {
 
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.getMenu().findItem(R.id.nav_setting).setChecked(false);
