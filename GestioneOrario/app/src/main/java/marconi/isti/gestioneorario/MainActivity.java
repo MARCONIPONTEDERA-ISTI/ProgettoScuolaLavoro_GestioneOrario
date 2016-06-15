@@ -219,13 +219,13 @@ public class MainActivity extends AppCompatActivity
 
                     String selezionata = adapterView.getItemAtPosition(i).toString();
 
-                    Spinner pinnerc = (Spinner) findViewById(R.id.spinnerClasse);
+                   Spinner pinnerc = (Spinner) findViewById(R.id.spinnerClasse);
                     Spinner pinnerf = (Spinner) findViewById(R.id.spinnerAula);
                     Spinner pinner = (Spinner) findViewById(R.id.spinnerMateria);
                     if(selezionata.length()>1) {
                         pinnerc.setEnabled(false);
                         pinnerf.setEnabled(false);
-                        pinner.setEnabled(false);
+                   //     pinner.setEnabled(false);
                     }else{
                         pinnerc.setEnabled(true);
                         pinnerf.setEnabled(true);
@@ -347,17 +347,17 @@ public class MainActivity extends AppCompatActivity
                 if (prof.isEnabled()) {
                     ArrayList<Orario> lo = tb.SearchbyProf(pf, g + 1);
                     i.putExtra("ListaOrari", lo);
-                    i.putExtra("tipo", pf);
+                    i.putExtra("tipo", "Professore "+pf);
                 } else if (aula.isEnabled()) {
                     String au = aula.getSelectedItem().toString();
                     ArrayList<Orario> lo =(ArrayList<Orario>) tb.SearchbyAula(au, g + 1);
                     i.putExtra("ListaOrari", lo);
-                    i.putExtra("tipo", au);
+                    i.putExtra("tipo", "Aula: "+au);
                 } else if (classe.isEnabled()) {
                     String cla = classe.getSelectedItem().toString(); //au+" "+lo.size()
                     ArrayList<Orario> lo =(ArrayList<Orario>) tb.SearchbyClasse(cla, g + 1);
                     i.putExtra("ListaOrari", lo);
-                    i.putExtra("tipo", cla);
+                    i.putExtra("tipo", "Classe: "+cla);
                 }
             }
 

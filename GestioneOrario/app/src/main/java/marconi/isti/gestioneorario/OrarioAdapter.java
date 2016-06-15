@@ -52,7 +52,13 @@ public class OrarioAdapter extends RecyclerView.Adapter<OrarioAdapter.OrarioView
         holder.materiacard.setText(lorario.get(position).getMateria());
         holder.inizio.setText(lorario.get(position).getSOrainizio());
         holder.fine.setText(lorario.get(position).getSOrafine());
-        holder.aula.setText(lorario.get(position).getAula().replaceAll(" ", System.getProperty("line.separator")));
+        String aulas = lorario.get(position).getAula();
+        if(aulas.length()>6){
+            holder.aula.setText(aulas.replaceAll(" ", System.getProperty("line.separator")));
+        }else{
+            holder.aula.setText(aulas);
+        }
+
         //holder.onClick(holder.i);
 
     }

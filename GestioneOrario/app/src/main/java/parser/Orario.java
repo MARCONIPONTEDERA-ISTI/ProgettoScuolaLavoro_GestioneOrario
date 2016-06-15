@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Orario implements Serializable{
+public class Orario implements Serializable, Comparable<Orario>{
 
 	private Date orainizio;
 	private Date orafine;
@@ -31,8 +31,11 @@ public class Orario implements Serializable{
 		return orainizio;
 	}
 	public String getSOrainizio() {
-		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-		return format.format(orainizio);
+		if(orainizio!=null) {
+			SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+			return format.format(orainizio);
+		}
+		return "";
 	}
 	public void setOrainizio(Date orainizio) {
 		this.orainizio = orainizio;
@@ -41,8 +44,11 @@ public class Orario implements Serializable{
 		return orafine;
 	}
 	public String getSOrafine() {
-		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-		return format.format(orafine);
+		if(orafine!=null) {
+			SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+			return format.format(orafine);
+		}
+		return "";
 	}
 	public void setOrafine(Date orafine) {
 		this.orafine = orafine;
@@ -77,9 +83,15 @@ public class Orario implements Serializable{
 				+ ", Aula=" + Aula + ", Professore=" + Professore + ", Classe="
 				+ Classe + ", Materia=" + Materia + "\n\r";
 	}
-	
-	
-	
 
 
+	@Override
+	public int compareTo(Orario orario) {
+		if(orario!=null & orainizio!=null){
+			if(orario.getOrainizio()!=null) {
+				return orainizio.compareTo(orario.getOrainizio());
+			}
+		}
+		return -1;
+	}
 }
