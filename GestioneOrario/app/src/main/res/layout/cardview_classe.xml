@@ -21,7 +21,7 @@
             android:id="@+id/classecard"
             android:layout_gravity="center|right"
             android:gravity="center|right"
-            android:background="@drawable/rounded_cornerC"
+            android:background="@drawable/rounded_cornerc"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="1dp"
@@ -39,7 +39,7 @@
             android:textSize="20sp"
             android:text="MERLINI FRANCESCA"
             android:gravity="center"
-            android:layout_alignTop="@+id/aula_card"
+            android:layout_alignTop="@+id/card_viewinternal"
             android:layout_alignStart="@+id/ora_inizio"
             android:layout_alignEnd="@+id/ora_fine" />
 
@@ -70,24 +70,38 @@
             android:id="@+id/ora_fine"
             android:text="00:00"
             android:layout_below="@+id/materiacard"
-            android:layout_toStartOf="@+id/aula_card"
+            android:layout_toStartOf="@+id/card_viewinternal"
             android:layout_marginRight="10dp" />
 
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_viewinternal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            card_view:cardCornerRadius="4dp"
+
+            card_view:cardBackgroundColor="@android:color/holo_blue_light"
+            android:layout_margin="5dp"
+            >
         <TextView
             android:layout_width="wrap_content"
             android:maxWidth="100dp"
 
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/aula_card"
             android:layout_alignParentTop="true"
             android:textStyle="bold"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/rounded_corner"
+
             android:layout_gravity="center"
             android:gravity="center|right"
             android:text="LAB1\nCIAO"
             android:paddingLeft="10dp"
             android:paddingRight="10dp" />
+</android.support.v7.widget.CardView>
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
