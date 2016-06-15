@@ -31,7 +31,7 @@ public class ListenerTB  implements CompoundButton.OnCheckedChangeListener {
         Activity t = (Activity) buttonView.getContext();
 
 
-            List<ToggleButton> ltb  = new ArrayList<ToggleButton>();
+         /*   List<ToggleButton> ltb  = new ArrayList<ToggleButton>();
             ToggleButton prima = (ToggleButton)t.findViewById(R.id.buttonO1);
             ltb.add(prima);
             ToggleButton seconda = (ToggleButton)t.findViewById(R.id.buttonO2);
@@ -67,7 +67,7 @@ public class ListenerTB  implements CompoundButton.OnCheckedChangeListener {
             }
 
 
-
+*/
 
 
 

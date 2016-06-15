@@ -79,7 +79,7 @@
             android:layout_alignParentTop="true"
             android:textStyle="bold"
             android:layout_alignParentEnd="true"
-            android:background="@android:color/holo_red_light"
+            android:background="@android:color/holo_blue_light"
             android:layout_gravity="center|right"
             android:gravity="center|right"
             android:text="LAB1\nCIAO"

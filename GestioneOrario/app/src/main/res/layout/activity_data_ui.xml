@@ -31,13 +31,18 @@
         android:id="@+id/radioPiano"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@id/tipo_ricerca"
-        android:layout_below="@id/tipo_ricerca" >
+
+        android:layout_below="@+id/giornoricerca"
+        android:orientation="horizontal"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        >
 
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="P2"
+        android:text="P0"
         android:id="@+id/radioButtonP1"
 
 
@@ -54,7 +59,7 @@
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="P0"
+        android:text="P2"
         android:id="@+id/radioButtonPT"
 
         android:clickable="false" />
@@ -62,13 +67,13 @@
 
 
     <marconi.isti.gestioneorario.TouchImageView
-        android:layout_width="310dp"
+        android:layout_width="match_parent"
         android:layout_height="310dp"
         android:id="@+id/imageView2"
         android:src="@drawable/g1"
         android:adjustViewBounds="true"
         android:scaleType="matrix"
-        android:layout_below="@+id/giornoricerca"
+        android:layout_below="@+id/radioPiano"
         android:layout_alignParentStart="true" />
 
 
@@ -79,71 +84,14 @@
         android:layout_height= "2dp"
         android:background="@color/colorPrimary" />
 
-    <ToggleButton
-        android:layout_width="55dp"
-        android:layout_height="wrap_content"
-        android:textOn="1"
-        android:textOff="1"
-        android:id="@+id/buttonO1"
-        android:layout_below="@id/SplitLine_hor1"
-        android:layout_alignParentStart="true" />
 
-    <ToggleButton
-        android:layout_width="55dp"
-        android:layout_height="wrap_content"
-        android:textOn="2"
-        android:textOff="2"
-        android:id="@+id/buttonO2"
-        android:layout_below="@id/SplitLine_hor1"
-        android:layout_toEndOf="@id/buttonO1"
-        android:singleLine="false" />
-
-    <ToggleButton
-        android:layout_width="55dp"
-        android:layout_height="wrap_content"
-        android:textOn="3"
-        android:textOff="3"
-        android:id="@+id/buttonO3"
-        android:singleLine="false"
-        android:layout_below="@id/SplitLine_hor1"
-        android:layout_toEndOf="@id/buttonO2" />
-
-    <ToggleButton
-        android:layout_width="55dp"
-        android:layout_height="wrap_content"
-        android:textOn="4"
-        android:textOff="4"
-        android:id="@+id/buttonO4"
-        android:singleLine="false"
-        android:layout_below="@id/SplitLine_hor1"
-        android:layout_toEndOf="@id/buttonO3" />
-
-    <ToggleButton
-        android:layout_width="55dp"
-        android:layout_height="wrap_content"
-        android:textOn="5"
-        android:textOff="5"
-        android:id="@+id/buttonO5"
-        android:singleLine="false"
-        android:layout_below="@id/SplitLine_hor1"
-        android:layout_toEndOf="@id/buttonO4" />
-
-    <ToggleButton
-        android:layout_width="55dp"
-        android:layout_height="wrap_content"
-        android:textOn="6"
-        android:textOff="6"
-        android:id="@+id/buttonO6"
-        android:singleLine="false"
-        android:layout_below="@id/SplitLine_hor1"
-        android:layout_toEndOf="@id/buttonO5" />
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cardList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/buttonO6"
+        android:layout_below="@id/SplitLine_hor1"
         />
 
 

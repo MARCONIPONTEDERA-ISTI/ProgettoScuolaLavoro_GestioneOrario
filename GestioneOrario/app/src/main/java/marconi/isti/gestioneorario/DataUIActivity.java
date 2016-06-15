@@ -55,21 +55,9 @@ public class DataUIActivity extends AppCompatActivity {
         TextView tipo_ricerca = (TextView)findViewById(R.id.tipo_ricerca);
         tipo_ricerca.setText(tipo);
 
-        ToggleButton prima = (ToggleButton)findViewById(R.id.buttonO1);
-        ToggleButton seconda = (ToggleButton)findViewById(R.id.buttonO2);
-        ToggleButton terza = (ToggleButton)findViewById(R.id.buttonO3);
-        ToggleButton quarta = (ToggleButton) findViewById(R.id.buttonO4);
-        ToggleButton quinta = (ToggleButton) findViewById(R.id.buttonO5);
-        ToggleButton sesta = (ToggleButton) findViewById(R.id.buttonO6);
 
-        if(lo!=null)
-        if(!lo.isEmpty())
-            prima.setChecked(true);
 
-        ListenerTB ltb = new ListenerTB(lo);
-        prima.setOnCheckedChangeListener(ltb);
-        seconda.setOnCheckedChangeListener(ltb);
-        terza.setOnCheckedChangeListener(ltb);
+
       /*  terza.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -84,9 +72,7 @@ public class DataUIActivity extends AppCompatActivity {
                 }
             }
             });*/
-        quarta.setOnCheckedChangeListener(ltb);
-        quinta.setOnCheckedChangeListener(ltb);
-        sesta.setOnCheckedChangeListener(ltb);
+
 
         if(lo!=null) {
             OrarioAdapter adapter = new OrarioAdapter(lo);
@@ -103,31 +89,7 @@ public class DataUIActivity extends AppCompatActivity {
                     if(firstVisibleItem >= 0) //check for scroll down
                     {
                         Activity t = (Activity) recyclerView.getContext();
-                        List<ToggleButton> ltb  = new ArrayList<ToggleButton>();
-                        ToggleButton prima = (ToggleButton)t.findViewById(R.id.buttonO1);
-                        ltb.add(prima);
-                        ToggleButton seconda = (ToggleButton)t.findViewById(R.id.buttonO2);
-                        ltb.add(seconda);
-                        ToggleButton terza = (ToggleButton) t.findViewById(R.id.buttonO3);
-                        ltb.add(terza);
-                        ToggleButton quarta = (ToggleButton) t.findViewById(R.id.buttonO4);
-                        ltb.add(quarta);
-                        ToggleButton quinta = (ToggleButton) t.findViewById(R.id.buttonO5);
-                        ltb.add(quinta);
-                        ToggleButton sesta = (ToggleButton) t.findViewById(R.id.buttonO6);
-                        ltb.add(sesta);
 
-                        int ora = 0;
-                        for( ToggleButton s: ltb){
-                            if(firstVisibleItem==ora){
-                                if(!s.isChecked()) {
-                                    s.setChecked(true);
-                                }
-                            }else{
-                                s.setChecked(false);
-                            }
-                            ora++;
-                        }
 
                     }
                 }
@@ -137,29 +99,7 @@ public class DataUIActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(int position, View v) {
                     Activity t = (Activity) v.getContext();
-                    List<ToggleButton> ltb  = new ArrayList<ToggleButton>();
-                    ToggleButton prima = (ToggleButton)t.findViewById(R.id.buttonO1);
-                    ltb.add(prima);
-                    ToggleButton seconda = (ToggleButton)t.findViewById(R.id.buttonO2);
-                    ltb.add(seconda);
-                    ToggleButton terza = (ToggleButton) t.findViewById(R.id.buttonO3);
-                    ltb.add(terza);
-                    ToggleButton quarta = (ToggleButton) t.findViewById(R.id.buttonO4);
-                    ltb.add(quarta);
-                    ToggleButton quinta = (ToggleButton) t.findViewById(R.id.buttonO5);
-                    ltb.add(quinta);
-                    ToggleButton sesta = (ToggleButton) t.findViewById(R.id.buttonO6);
-                    ltb.add(sesta);
 
-                    int ora = 0;
-                    for( ToggleButton s: ltb){
-                        if(position==ora){
-                            s.setChecked(true);
-                        }else{
-                            s.setChecked(false);
-                        }
-                        ora++;
-                    }
                 }
             } );
            // rv.addOnItemTouchListener(adapter.getMyClickListener());
