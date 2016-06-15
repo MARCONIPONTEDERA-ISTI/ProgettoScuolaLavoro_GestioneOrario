@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -460,7 +461,20 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
+            ImageView image = new ImageView(this);
+            image.setImageResource(R.drawable.ic_menu_share);
 
+            AlertDialog.Builder builder =
+                    new AlertDialog.Builder(this).
+                            setMessage("Share").
+                            setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            }).
+                            setView(image);
+            builder.create().show();
 
         } else if(id == R.id.nav_info){
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
