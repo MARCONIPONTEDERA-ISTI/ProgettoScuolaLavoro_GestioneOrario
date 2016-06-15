@@ -1,9 +1,10 @@
 package parser;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Classe {
+public class Classe implements Serializable {
 	
 	private String nome;
 	private List<Orario> listaOrari;
