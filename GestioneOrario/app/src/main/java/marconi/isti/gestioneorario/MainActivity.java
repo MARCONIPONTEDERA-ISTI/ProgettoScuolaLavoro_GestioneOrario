@@ -417,50 +417,59 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.getMenu().findItem(R.id.orariocompleto).setChecked(false);
-
-            Intent i = new Intent(MainActivity.this, OrarioCompleto.class);
-            ArrayList<GiornoSettimana> lo = ( ArrayList<GiornoSettimana>) tb.getListaOrarioSettimana();
-            i.putExtra("OrarioCompleto", lo);
-            startActivity(i);
+            if(tb!=null) {
+                Intent i = new Intent(MainActivity.this, OrarioCompleto.class);
+                ArrayList<GiornoSettimana> lo = (ArrayList<GiornoSettimana>) tb.getListaOrarioSettimana();
+                i.putExtra("OrarioCompleto", lo);
+                startActivity(i);
+            }
 
 
         } else if (id == R.id.nav_pref) {
 
-            // 1. Instantiate an AlertDialog.Builder with its constructor
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            if(tb!=null) {
+
+                // 1. Instantiate an AlertDialog.Builder with its constructor
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
 // 2. Chain together various setter methods to set the dialog characteristics
-            builder.setTitle("Seleziona la tua classe");
-                  //  .setTitle("Salva la tua Classe tra i preferiti");
-            CharSequence[] cs = tb.getClassi().toArray(new CharSequence[tb.getClassi().size()]);
+                builder.setTitle("Seleziona la tua classe");
+                //  .setTitle("Salva la tua Classe tra i preferiti");
+                CharSequence[] cs = tb.getClassi().toArray(new CharSequence[tb.getClassi().size()]);
 
-            builder.setItems(cs, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
+                builder.setItems(cs, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
 
-                    SharedPreferences sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putInt("Classe", which);
-                    editor.commit();
+                        SharedPreferences sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putInt("Classe", which);
+                        editor.commit();
+                        View v = findViewById(R.id.spinnerMateria);
+                        Snackbar.make(v, "Preferenze Salvate", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
 
-                }
-            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    // User cancelled the dialog
-                    dialog.dismiss();
-                }
-            });
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                        dialog.dismiss();
+                    }
+                });
 
 // 3. Get the AlertDialog from create()
-            AlertDialog dialog = builder.create();
-            dialog.show();
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.getMenu().findItem(R.id.nav_pref).setChecked(false);
 
         } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
+        } /*else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
+        }*/ else if (id == R.id.nav_share) {
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.getMenu().findItem(R.id.nav_share).setChecked(false);
             ImageView image = new ImageView(this);
             image.setImageResource(R.drawable.ic_menu_share);
 

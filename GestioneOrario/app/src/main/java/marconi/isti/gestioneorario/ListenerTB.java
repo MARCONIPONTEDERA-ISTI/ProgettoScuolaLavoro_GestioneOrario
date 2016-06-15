@@ -44,9 +44,16 @@ public class ListenerTB  implements CompoundButton.OnCheckedChangeListener {
             ltb.add(quinta);
             ToggleButton sesta = (ToggleButton) t.findViewById(R.id.buttonO6);
             ltb.add(sesta);
-
+        if(buttonView.getId()==sesta.getId()){
+            TouchImageView tiv = (TouchImageView)t.findViewById(R.id.imageView2);
+            float scale = 10.25f;
+            float fx = 0.1f;
+            float fy = 0.1f;
+            tiv.setZoom(scale,fx,fy );
+        }
             int ora = 0;
             for( ToggleButton s: ltb){
+
                 if(buttonView.getId()==s.getId()){
                     if(isChecked) {
                         ora = Integer.parseInt(s.getText().toString().trim());

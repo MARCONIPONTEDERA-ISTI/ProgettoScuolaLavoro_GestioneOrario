@@ -14,10 +14,10 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_refresh_black_24dp"
             android:title="Recenti" />
-        <item
+       <!-- <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_search_black_24dp"
-            android:title="Search" />
+            android:title="Search" />-->
 
         <item
             android:id="@+id/nav_setting"
