@@ -21,7 +21,7 @@
             android:id="@+id/classecard"
             android:layout_gravity="center|right"
             android:gravity="center|right"
-            android:background="@android:color/holo_red_light"
+            android:background="@drawable/rounded_cornerC"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="1dp"
@@ -50,8 +50,9 @@
             android:textStyle="bold"
             android:layout_below="@+id/profcard"
             android:text="ELETTROT. ED ELE."
-            android:layout_toRightOf="@id/classecard"
+
             android:layout_alignStart="@+id/ora_inizio"
+            android:layout_alignEnd="@+id/ora_fine"
             android:gravity="center" />
 
         <TextView
@@ -74,13 +75,15 @@
 
         <TextView
             android:layout_width="wrap_content"
+            android:maxWidth="100dp"
+
             android:layout_height="match_parent"
             android:id="@+id/aula_card"
             android:layout_alignParentTop="true"
             android:textStyle="bold"
             android:layout_alignParentEnd="true"
-            android:background="@android:color/holo_blue_light"
-            android:layout_gravity="center|right"
+            android:background="@drawable/rounded_corner"
+            android:layout_gravity="center"
             android:gravity="center|right"
             android:text="LAB1\nCIAO"
             android:paddingLeft="10dp"

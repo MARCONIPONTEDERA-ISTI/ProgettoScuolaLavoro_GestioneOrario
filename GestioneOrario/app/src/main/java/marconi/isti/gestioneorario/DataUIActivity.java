@@ -16,6 +16,7 @@ import android.widget.ImageView;
 
 import android.graphics.Matrix.ScaleToFit;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
@@ -41,6 +42,21 @@ public class DataUIActivity extends AppCompatActivity {
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
         rv.setLayoutManager(llm);
 
+
+        TouchImageView tiv = (TouchImageView)findViewById(R.id.imageView2);
+        tiv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                TouchImageView tiv = (TouchImageView)findViewById(R.id.imageView2);
+                RectF zoom = tiv.getZoomedRect();
+                String x = String.valueOf(zoom.centerX());
+                String y = String.valueOf(zoom.centerY());
+                Toast.makeText(getApplicationContext(),
+                        "X: "+x+"Y: "+y, Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
 
 
         Bundle b = getIntent().getExtras();
@@ -97,7 +113,7 @@ public class DataUIActivity extends AppCompatActivity {
 
             adapter.setMyClickListener(new MyClickListener() {
                 @Override
-                public void onItemClick(int position, View v) {
+                public void onItemClick(int position, Orario o, View v) {
                     Activity t = (Activity) v.getContext();
 
                 }
