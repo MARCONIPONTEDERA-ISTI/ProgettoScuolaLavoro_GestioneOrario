@@ -63,7 +63,7 @@
 
     <marconi.isti.gestioneorario.TouchImageView
         android:layout_width="310dp"
-        android:layout_height="290dp"
+        android:layout_height="310dp"
         android:id="@+id/imageView2"
         android:src="@drawable/primopianomarconi"
         android:adjustViewBounds="true"
