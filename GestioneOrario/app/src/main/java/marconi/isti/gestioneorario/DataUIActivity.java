@@ -1,20 +1,28 @@
 package marconi.isti.gestioneorario;
 
+import android.app.Activity;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 
 import android.graphics.Matrix.ScaleToFit;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import parser.Orario;
 
@@ -30,23 +38,131 @@ public class DataUIActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_ui);
 
+        RecyclerView rv = (RecyclerView)findViewById(R.id.cardList);
+        rv.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rv.setLayoutManager(llm);
+
+
+        TouchImageView tiv = (TouchImageView)findViewById(R.id.imageView2);
+        tiv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                TouchImageView tiv = (TouchImageView)findViewById(R.id.imageView2);
+                RectF zoom = tiv.getZoomedRect();
+                String x = String.valueOf(zoom.centerX());
+                String y = String.valueOf(zoom.centerY());
+                Toast.makeText(getApplicationContext(),
+                        "X: "+x+"Y: "+y, Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
+
+
         Bundle b = getIntent().getExtras();
         lo =  (ArrayList<Orario>)getIntent().getSerializableExtra("ListaOrari");
 
-        ToggleButton prima = (ToggleButton)findViewById(R.id.buttonO1);
-        ToggleButton seconda = (ToggleButton)findViewById(R.id.buttonO2);
-        ToggleButton terza = (ToggleButton)findViewById(R.id.buttonO3);
-        ToggleButton quarta = (ToggleButton) findViewById(R.id.buttonO4);
-        ToggleButton quinta = (ToggleButton) findViewById(R.id.buttonO5);
-        ToggleButton sesta = (ToggleButton) findViewById(R.id.buttonO6);
+        String giorno = b.getString("giorno");
 
-        ListenerTB ltb = new ListenerTB(lo);
-        prima.setOnCheckedChangeListener(ltb);
-        seconda.setOnCheckedChangeListener(ltb);
-        terza.setOnCheckedChangeListener(ltb);
-        quarta.setOnCheckedChangeListener(ltb);
-        quinta.setOnCheckedChangeListener(ltb);
-        sesta.setOnCheckedChangeListener(ltb);
+        TextView textgiorno = (TextView)findViewById(R.id.giornoricerca);
+        textgiorno.setText(giorno);
+
+        String tipo = b.getString("tipo");
+        TextView tipo_ricerca = (TextView)findViewById(R.id.tipo_ricerca);
+        tipo_ricerca.setText(tipo);
+
+
+
+
+      /*  terza.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    buttonView.getId();
+
+
+                    RecyclerView rv = (RecyclerView)findViewById(R.id.cardList);
+                    LinearLayoutManager llm = ((LinearLayoutManager) rv.getLayoutManager());
+                    ((LinearLayoutManager) rv.getLayoutManager()).smoothScrollToPosition(rv, null, 2);
+
+                }
+            }
+            });*/
+
+
+        if(lo!=null) {
+            OrarioAdapter adapter = new OrarioAdapter(lo);
+
+
+            rv.addOnScrollListener(new RecyclerView.OnScrollListener()
+            {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+                {
+                    super.onScrolled(recyclerView, dx, dy);
+                    int firstVisibleItem = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+
+                    if(firstVisibleItem >= 0) //check for scroll down
+                    {
+                        Activity t = (Activity) recyclerView.getContext();
+
+
+                    }
+                }
+            });
+
+            adapter.setMyClickListener(new MyClickListener() {
+                @Override
+                public void onItemClick(int position, String o, View v) {
+                    Activity t = (Activity) v.getContext();
+                    Coordinate c = new Coordinate();
+                    Integer piano = c.getPiano(o);
+                    TouchImageView tiv = (TouchImageView)findViewById(R.id.imageView2);
+                    if(piano!=null){
+                        if(piano==0) {
+                            RadioButton rv = (RadioButton) findViewById(R.id.radioButtonP1);
+                            rv.setChecked(true);
+
+                            tiv.setImageResource(R.drawable.primo);
+
+                        }else{
+                            if(piano==1) {
+                                RadioButton rv = (RadioButton) findViewById(R.id.radioButtonP2);
+                                rv.setChecked(true);
+
+                                tiv.setImageResource(R.drawable.secondo1);
+
+                            }else{
+                                if(piano==2) {
+                                    RadioButton rv = (RadioButton) findViewById(R.id.radioButtonP3);
+                                    rv.setChecked(true);
+
+                                    tiv.setImageResource(R.drawable.terzo);
+
+                                }
+                            }
+                        }
+                        Pair<Float, Float> xy = c.getCoordiante(o);
+                        if(xy!=null){
+
+                            tiv.setZoom(20f,xy.first,xy.second);
+
+
+                        }
+
+                    }else{
+                        tiv.setImageResource(R.drawable.textnp);
+                    }
+
+                }
+            } );
+           // rv.addOnItemTouchListener(adapter.getMyClickListener());
+            rv.setAdapter(adapter);
+        }
+
+
        /* ImageView imageView = (ImageView)findViewById(R.id.imageView2);
 
         matrix = imageView.getImageMatrix();
@@ -67,11 +183,11 @@ public class DataUIActivity extends AppCompatActivity {
 
 
 
-    @Override
+  /*  @Override
     public boolean onTouchEvent(MotionEvent ev) {
         scaleGestureDetector.onTouchEvent(ev);
         return true;
-    }
+    }*/
 
   /*  private class ScaleListener extends ScaleGestureDetector.
             SimpleOnScaleGestureListener {

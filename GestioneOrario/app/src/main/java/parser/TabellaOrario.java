@@ -1,5 +1,7 @@
 package parser;
 
+import android.support.v7.util.SortedList;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
@@ -10,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.jsoup.Jsoup;
@@ -21,28 +26,36 @@ import org.jsoup.select.Elements;
 public class TabellaOrario implements Serializable {
 
 	List<GiornoSettimana> orariosettimana;
-	Map<String,List<String>> mapMateriaProf;
-	ArrayList<String> ListProf;
-	ArrayList<String> ListAule;
-	ArrayList<String> ListClassi;
+	TreeMap<String,TreeSet<String>> mapMateriaProf;
+	Map<String,List<Orario>> listaOrarioProf;
+	TreeSet<String> ListProf;
+	TreeSet<String> ListAule;
+	TreeSet<String> ListClassi;
 	private String url;
 
 	
 	public TabellaOrario(String url){
+		listaOrarioProf = new HashMap<String,List<Orario>>();
 		orariosettimana = new ArrayList<GiornoSettimana>();
-		mapMateriaProf = new HashMap<String, List<String>>();
-		ListProf = new ArrayList<String>();
+		mapMateriaProf = new TreeMap<String, TreeSet<String>>();
+		TreeSet<String> lp = new TreeSet<String>();
+		lp.add("");
+		mapMateriaProf.put("",lp );
+		ListProf = new TreeSet<String>();
 		ListProf.add(" ");
-		ListAule = new ArrayList<String>();
-		ListAule.add(" ");
+		ListAule = new TreeSet<String>();
+		// ListAule.add(" ");
 
-		ListClassi = new ArrayList<String>();
+		ListClassi = new TreeSet<String>();
 		ListClassi.add(" ");
 
 		this.url = url;
 	}
 
 
+	public List<GiornoSettimana> getListaOrarioSettimana(){
+		return orariosettimana;
+	}
 
 	public void read(){
 		
@@ -89,11 +102,22 @@ public class TabellaOrario implements Serializable {
 
 
 			parserProfPage(mapprofurl);
+			//fix();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	private void fix() {
+		if(!orariosettimana.isEmpty()){
+			for (GiornoSettimana gs :orariosettimana) {
+
+
+			}
+		}
+
 	}
 
 	private  void parserProfPage(Map<String, String> mapprofurl) throws IOException {
@@ -201,7 +225,7 @@ public class TabellaOrario implements Serializable {
 										
 									}
 									classed.setListaOrari(orario);
-									
+
 									f.setListaOrari(orario);
 
 								}
@@ -214,8 +238,8 @@ public class TabellaOrario implements Serializable {
 
 				}
 				
-			if(o==7)
-					break;
+			//if(o==7)
+			//		break;
 				o++;
 			}
 		} catch (ParseException e1) {
@@ -231,9 +255,11 @@ public class TabellaOrario implements Serializable {
 
 	private void setMapMateriaProf(String materia, String f) {
 		if(mapMateriaProf.containsKey(materia)){
-			mapMateriaProf.get(materia).add(f);
+			if(!mapMateriaProf.get(materia).contains(f)) {
+				mapMateriaProf.get(materia).add(f);
+			}
 		}else{
-			List<String> lp = new ArrayList<String>();
+			TreeSet<String> lp = new TreeSet<String>();
 			lp.add(f);
 			mapMateriaProf.put(materia,lp );
 		}
@@ -323,7 +349,7 @@ public class TabellaOrario implements Serializable {
 		for(GiornoSettimana gs  : orariosettimana){
 			if(gs.getDayofweek()==i){
 				LOrario = gs.searchProfessore(string);
-				System.out.println(getGiorno(i)+" "+LOrario);
+
 				//break;
 			}
 		}
@@ -349,7 +375,7 @@ public class TabellaOrario implements Serializable {
 		for(GiornoSettimana gs  : orariosettimana){
 			if(gs.getDayofweek()==i){
 				LOrario = gs.searchClasse(string);
-				System.out.println(getGiorno(i)+" "+LOrario);
+			//	System.out.println(getGiorno(i)+" "+LOrario);
 				//break;
 			}
 		}
@@ -359,25 +385,25 @@ public class TabellaOrario implements Serializable {
 
 	}
 
-	private  String getGiorno(int num){
+	public  String getGiorno(int num){
 		switch (num) {
 		case 1:
-			return "LUN";
+			return "LUNEDI";
 
 		case 2:
-			return "MAR";
+			return "MARTEDI";
 
 		case 3:
-			return "MER";
+			return "MERCOLEDI";
 
 		case 4:
-			return "GIO";
+			return "GIOVEDI";
 
 		case 5:
-			return "VEN";
+			return "VENERDI";
 
 		case 6:
-			return "SAB";
+			return "SABATO";
 
 		default:
 			break;
@@ -390,16 +416,23 @@ public class TabellaOrario implements Serializable {
 
 	}
 
-	public ArrayList<String> getProfessori(){
+	public TreeSet<String> getProfessori(){
 		return ListProf;
 	}
 
 	public ArrayList<String> getClassi(){
-		return ListClassi;
+		return new ArrayList<>(ListClassi);
 	}
 
 	public ArrayList<String> getAule(){
-		return ListAule;
+		return new ArrayList<>(ListAule);
+	}
+
+	public TreeSet<String> getProfessoriformMateria(String Materia){
+		if(mapMateriaProf.containsKey(Materia)){
+			return mapMateriaProf.get(Materia);
+		}
+		return new TreeSet<String>();
 	}
 
 	public Set<String> getMaterie() {

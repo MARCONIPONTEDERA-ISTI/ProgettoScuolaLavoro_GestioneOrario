@@ -3,14 +3,15 @@ package parser;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 public class Professore implements Serializable {
 	
 	private String Nome;
-	private ArrayList<Orario> listaOrari;
+	private TreeSet<Orario> listaOrari;
 	
 	public Professore(){
-		listaOrari = new ArrayList<Orario>();
+		listaOrari = new TreeSet<Orario>();
 	}
 
 	public String getNome() {
@@ -22,11 +23,21 @@ public class Professore implements Serializable {
 	}
 
 	public ArrayList<Orario> getListaOrari() {
-		return listaOrari;
+		return new ArrayList<Orario>(listaOrari);
 	}
 
 	public void setListaOrari(Orario o) {
-		 listaOrari.add(o);
+		listaOrari.add(o);
+	/*	if(!o.getSOrainizio().equals("07:50") & listaOrari.isEmpty()){
+			Orario orario =  new Orario(null, null, "", "", "", "");
+			listaOrari.add(orario);
+
+			listaOrari.add(o);
+		}else{
+			listaOrari.add(o);
+
+		}
+*/
 	}
 
 	@Override

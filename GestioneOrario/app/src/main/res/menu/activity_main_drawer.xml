@@ -3,26 +3,26 @@
 
     <group android:id="@+id/group1" android:checkableBehavior="single" >
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/orariocompleto"
             android:icon="@drawable/clock"
             android:title="Orario Completo" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_pref"
             android:icon="@drawable/ic_star_border_black_24dp"
             android:title="Preferiti" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_refresh_black_24dp"
             android:title="Recenti" />
-        <item
+       <!-- <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_search_black_24dp"
-            android:title="Search" />
+            android:title="Search" />-->
 
         <item
             android:id="@+id/nav_setting"
             android:icon="@drawable/ic_settings_black_24dp"
-            android:title="Impostazioni" />
+            android:title="Aggiorna Orario" />
 
     </group>
 
