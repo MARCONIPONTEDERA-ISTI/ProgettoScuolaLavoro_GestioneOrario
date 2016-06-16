@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 
 import android.graphics.Matrix.ScaleToFit;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -113,8 +115,25 @@ public class DataUIActivity extends AppCompatActivity {
 
             adapter.setMyClickListener(new MyClickListener() {
                 @Override
-                public void onItemClick(int position, Orario o, View v) {
+                public void onItemClick(int position, String o, View v) {
                     Activity t = (Activity) v.getContext();
+                    Coordinate c = new Coordinate();
+                    Integer piano = c.getPiano(o);
+                    if(piano!=null){
+                        if(piano==0) {
+                            RadioButton rv = (RadioButton) findViewById(R.id.radioButtonP1);
+                            rv.setChecked(true);
+                            //// TODO: 16/06/2016  chiama la mappa
+                        }
+                        Pair<Float, Float> xy = c.getCoordiante(o);
+                        if(xy!=null){
+
+                            TouchImageView tiv = (TouchImageView)findViewById(R.id.imageView2);
+                            tiv.setZoom(20f,xy.first,xy.second);
+
+                        }
+
+                    }
 
                 }
             } );

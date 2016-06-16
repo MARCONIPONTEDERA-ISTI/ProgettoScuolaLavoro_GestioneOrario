@@ -13,16 +13,28 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         >
-
-        <TextView
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_viewinternal1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+
+            android:layout_alignParentTop="true"
+            card_view:cardCornerRadius="4dp"
+
+            card_view:cardBackgroundColor="@android:color/holo_red_light"
+            android:layout_margin="5dp"
+            >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textSize="20sp"
             android:id="@+id/classecard"
             android:layout_gravity="center|right"
             android:gravity="center|right"
-            android:background="@drawable/rounded_cornerc"
-            android:layout_alignParentLeft="true"
+
+
             android:layout_alignParentTop="true"
             android:layout_marginRight="1dp"
             android:textAlignment="center"
@@ -31,7 +43,7 @@
             android:elegantTextHeight="false"
             android:paddingLeft="10dp"
             android:paddingRight="10dp" />
-
+        </android.support.v7.widget.CardView>
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -59,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/ora_inizio"
-            android:layout_toRightOf="@id/classecard"
+            android:layout_toRightOf="@id/card_viewinternal1"
             android:layout_below="@id/materiacard"
             android:text="00:00"
             android:layout_marginLeft="10dp" />

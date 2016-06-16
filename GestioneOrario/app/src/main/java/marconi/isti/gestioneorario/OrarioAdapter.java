@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import parser.Orario;
@@ -78,12 +79,12 @@ public class OrarioAdapter extends RecyclerView.Adapter<OrarioAdapter.OrarioView
         TextView classe;
         TextView aula;
         View i;
-        List<Orario> lorario;
 
 
 
         OrarioViewHolder(View itemView) {
             super(itemView);
+
             cv = (CardView)itemView.findViewById(R.id.card_view);
             profcard = (TextView)itemView.findViewById(R.id.profcard);
             profcard.setOnLongClickListener(new View.OnLongClickListener(){
@@ -105,7 +106,7 @@ public class OrarioAdapter extends RecyclerView.Adapter<OrarioAdapter.OrarioView
         @Override
         public void onClick(View view) {
             if(myClickListener!=null) {
-                myClickListener.onItemClick(getAdapterPosition(),lorario.get(getAdapterPosition()), view);
+                myClickListener.onItemClick(getAdapterPosition(),aula.getText().toString(), view);
             }
         }
 
