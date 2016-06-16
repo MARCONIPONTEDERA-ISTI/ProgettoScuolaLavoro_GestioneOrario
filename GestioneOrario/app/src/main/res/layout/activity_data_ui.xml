@@ -61,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="P2"
-        android:id="@+id/radioButtonPT"
+        android:id="@+id/radioButtonP3"
 
         android:clickable="false" />
     </RadioGroup>
@@ -71,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="310dp"
         android:id="@+id/imageView2"
-        android:src="@drawable/primo"
+        android:src="@drawable/text"
         android:adjustViewBounds="true"
         android:scaleType="matrix"
         android:layout_below="@+id/radioPiano"

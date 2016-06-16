@@ -119,16 +119,37 @@ public class DataUIActivity extends AppCompatActivity {
                     Activity t = (Activity) v.getContext();
                     Coordinate c = new Coordinate();
                     Integer piano = c.getPiano(o);
+                    TouchImageView tiv = (TouchImageView)findViewById(R.id.imageView2);
                     if(piano!=null){
                         if(piano==0) {
                             RadioButton rv = (RadioButton) findViewById(R.id.radioButtonP1);
                             rv.setChecked(true);
-                            //// TODO: 16/06/2016  chiama la mappa
+
+                            tiv.setImageResource(R.drawable.primo);
+
+                        }else{
+                            if(piano==1) {
+                                RadioButton rv = (RadioButton) findViewById(R.id.radioButtonP2);
+                                rv.setChecked(true);
+
+                                tiv.setImageResource(R.drawable.secondo1);
+
+                            }else{
+                                if(piano==2) {
+                                    RadioButton rv = (RadioButton) findViewById(R.id.radioButtonP3);
+                                    rv.setChecked(true);
+
+                                    tiv.setImageResource(R.drawable.terzo);
+
+                                }else{
+                                    tiv.setImageResource(R.drawable.textnp);
+                                }
+                            }
                         }
                         Pair<Float, Float> xy = c.getCoordiante(o);
                         if(xy!=null){
 
-                            TouchImageView tiv = (TouchImageView)findViewById(R.id.imageView2);
+
                             tiv.setZoom(20f,xy.first,xy.second);
 
                         }
