@@ -22,3 +22,12 @@ di seguito un esempio di mockup dell’applicazione:
 <img src="img_progetto/02.jpg" data-canonical-src="img/mockup1.jpg" width="300" height="400" />
 <img src="img_progetto/03.jpg" data-canonical-src="img/mockup1.jpg" width="300" height="400" />
 <img src="img_progetto/04.jpg" data-canonical-src="img/mockup1.jpg" width="300" height="400" />
+
+di seguito un elenco di screenshot del protopito di applicazione implementato:
+
+<img src="img_progetto/nav.png"  width="300" height="550" />
+<img src="img_progetto/selectsearch.png"  width="300" height="550" />
+<img src="img_progetto/dwn.png"  width="300" height="550" />
+<img src="img_progetto/datimappa.png"  width="300" height="550" />
+<img src="img_progetto/share.png"  width="300" height="550" />
+<img src="img_progetto/orariocompleto.png"  width="300" height="550" />
