@@ -27,6 +27,7 @@ public class TabellaOrario implements Serializable {
 
 	List<GiornoSettimana> orariosettimana;
 	TreeMap<String,TreeSet<String>> mapMateriaProf;
+	Map<String,List<Orario>> listaOrarioProf;
 	TreeSet<String> ListProf;
 	TreeSet<String> ListAule;
 	TreeSet<String> ListClassi;
@@ -34,6 +35,7 @@ public class TabellaOrario implements Serializable {
 
 	
 	public TabellaOrario(String url){
+		listaOrarioProf = new HashMap<String,List<Orario>>();
 		orariosettimana = new ArrayList<GiornoSettimana>();
 		mapMateriaProf = new TreeMap<String, TreeSet<String>>();
 		TreeSet<String> lp = new TreeSet<String>();
@@ -42,7 +44,7 @@ public class TabellaOrario implements Serializable {
 		ListProf = new TreeSet<String>();
 		ListProf.add(" ");
 		ListAule = new TreeSet<String>();
-		ListAule.add(" ");
+		// ListAule.add(" ");
 
 		ListClassi = new TreeSet<String>();
 		ListClassi.add(" ");
@@ -51,6 +53,9 @@ public class TabellaOrario implements Serializable {
 	}
 
 
+	public List<GiornoSettimana> getListaOrarioSettimana(){
+		return orariosettimana;
+	}
 
 	public void read(){
 		
@@ -97,11 +102,22 @@ public class TabellaOrario implements Serializable {
 
 
 			parserProfPage(mapprofurl);
+			//fix();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	private void fix() {
+		if(!orariosettimana.isEmpty()){
+			for (GiornoSettimana gs :orariosettimana) {
+
+
+			}
+		}
+
 	}
 
 	private  void parserProfPage(Map<String, String> mapprofurl) throws IOException {
@@ -209,7 +225,7 @@ public class TabellaOrario implements Serializable {
 										
 									}
 									classed.setListaOrari(orario);
-									
+
 									f.setListaOrari(orario);
 
 								}
@@ -222,8 +238,8 @@ public class TabellaOrario implements Serializable {
 
 				}
 				
-			if(o==7)
-					break;
+			//if(o==7)
+			//		break;
 				o++;
 			}
 		} catch (ParseException e1) {
@@ -333,7 +349,7 @@ public class TabellaOrario implements Serializable {
 		for(GiornoSettimana gs  : orariosettimana){
 			if(gs.getDayofweek()==i){
 				LOrario = gs.searchProfessore(string);
-				System.out.println(getGiorno(i)+" "+LOrario);
+
 				//break;
 			}
 		}
@@ -359,7 +375,7 @@ public class TabellaOrario implements Serializable {
 		for(GiornoSettimana gs  : orariosettimana){
 			if(gs.getDayofweek()==i){
 				LOrario = gs.searchClasse(string);
-				System.out.println(getGiorno(i)+" "+LOrario);
+			//	System.out.println(getGiorno(i)+" "+LOrario);
 				//break;
 			}
 		}

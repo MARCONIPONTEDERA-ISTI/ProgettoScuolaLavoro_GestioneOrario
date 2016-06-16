@@ -141,19 +141,19 @@ public class DataUIActivity extends AppCompatActivity {
 
                                     tiv.setImageResource(R.drawable.terzo);
 
-                                }else{
-                                    tiv.setImageResource(R.drawable.textnp);
                                 }
                             }
                         }
                         Pair<Float, Float> xy = c.getCoordiante(o);
                         if(xy!=null){
 
-
                             tiv.setZoom(20f,xy.first,xy.second);
+
 
                         }
 
+                    }else{
+                        tiv.setImageResource(R.drawable.textnp);
                     }
 
                 }

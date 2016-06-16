@@ -137,8 +137,10 @@ public class MainActivity extends AppCompatActivity
 
         int posClasseSalvata = sharedPref.getInt("Classe", 0);
 
-        Spinner pinnerc = (Spinner) findViewById(R.id.spinnerProf);
+        Spinner pinnerc = (Spinner) findViewById(R.id.spinnerClasse);
         pinnerc.setSelection(posClasseSalvata);
+        pinnerc.setEnabled(true);
+
     }
 
     private void aggiornaElement(final boolean flag) {
@@ -356,17 +358,19 @@ public class MainActivity extends AppCompatActivity
             if (tb != null) {
 
                 String pf = prof.getSelectedItem().toString();
-                if (prof.isEnabled()) {
+                String au = aula.getSelectedItem().toString();
+                String cla = classe.getSelectedItem().toString(); //au+" "+lo.size()
+                if (prof.isEnabled() && pf.length()>2) {
                     ArrayList<Orario> lo = tb.SearchbyProf(pf, g + 1);
                     i.putExtra("ListaOrari", lo);
                     i.putExtra("tipo",pf);
-                } else if (aula.isEnabled()) {
-                    String au = aula.getSelectedItem().toString();
+                } else if (aula.isEnabled()  && au.length()>2) {
+
                     ArrayList<Orario> lo =(ArrayList<Orario>) tb.SearchbyAula(au, g + 1);
                     i.putExtra("ListaOrari", lo);
                     i.putExtra("tipo", "Aula: "+au);
-                } else if (classe.isEnabled()) {
-                    String cla = classe.getSelectedItem().toString(); //au+" "+lo.size()
+                } else if (classe.isEnabled()  && cla.length()>2) {
+
                     ArrayList<Orario> lo =(ArrayList<Orario>) tb.SearchbyClasse(cla, g + 1);
                     i.putExtra("ListaOrari", lo);
                     i.putExtra("tipo", "Classe: "+cla);
@@ -444,6 +448,7 @@ public class MainActivity extends AppCompatActivity
                         SharedPreferences.Editor editor = sharedPref.edit();
                         editor.putInt("Classe", which);
                         editor.commit();
+                        //todo: setta lo spinner ora
                         View v = findViewById(R.id.spinnerMateria);
                         Snackbar.make(v, "Preferenze Salvate", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
@@ -471,7 +476,7 @@ public class MainActivity extends AppCompatActivity
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.getMenu().findItem(R.id.nav_share).setChecked(false);
             ImageView image = new ImageView(this);
-            image.setImageResource(R.drawable.ic_menu_share);
+            image.setImageResource(R.drawable.qrcode);
 
             AlertDialog.Builder builder =
                     new AlertDialog.Builder(this).

@@ -107,6 +107,7 @@ public class OrarioAdapter extends RecyclerView.Adapter<OrarioAdapter.OrarioView
         public void onClick(View view) {
             if(myClickListener!=null) {
                 myClickListener.onItemClick(getAdapterPosition(),aula.getText().toString(), view);
+                myClickListener.onItemClick(getAdapterPosition(),aula.getText().toString(), view);
             }
         }
 
