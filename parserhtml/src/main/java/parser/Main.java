@@ -11,11 +11,11 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		
-		String url = "http://www.marconipontedera.it/dcb/doceboCore/orario/index.html";
+		String url = "http://www.marconipontedera.gov.it/wordpress/wp-content/Orario%202016-17/index.html";
 		TabellaOrario tb = new TabellaOrario(url);
 		tb.setUrl(url);
 		tb.read();
-	//	tb.SearchbyProf("ANDRONICO",3);
+		tb.SearchbyProf("ANDRONICO",3);
 	//	tb.SearchbyClasse("4BSA",4);
 		
 		while (true) {

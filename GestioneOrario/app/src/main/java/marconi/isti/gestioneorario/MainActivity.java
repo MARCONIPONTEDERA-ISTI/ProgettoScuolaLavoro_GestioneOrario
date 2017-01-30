@@ -616,7 +616,7 @@ public class MainActivity extends AppCompatActivity
         public void run() {
 
 
-            tb = new TabellaOrario("http://www.marconipontedera.it/dcb/doceboCore/orario/index.html");
+            tb = new TabellaOrario("http://www.marconipontedera.gov.it/wordpress/wp-content/Orario%202016-17/index.html");
             tb.read();
             aggiornaElement(true);
 

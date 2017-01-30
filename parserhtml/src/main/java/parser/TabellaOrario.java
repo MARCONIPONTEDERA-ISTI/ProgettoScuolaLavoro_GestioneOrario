@@ -126,7 +126,7 @@ public class TabellaOrario implements Serializable {
 				Map<Integer,List<Columns>> mappaoccupazioni = new HashMap<Integer, List<Columns>>();
 				String url = mapprofurl.get(nomeprof);
 				System.out.println(url+nomeprof);
-				Document doc = Jsoup.connect("http://www.marconipontedera.it/dcb/doceboCore/orario/"+url).get();
+				Document doc = Jsoup.connect("http://www.marconipontedera.gov.it/wordpress/wp-content/Orario%202016-17/"+url).get();
 				//String gg = "http://www.marconipontedera.it/dcb/doceboCore/orario/Docenti/Docente26.html";
 				//Document doc = Jsoup.connect(gg).get();
 				Elements righe = doc.getElementsByTag("tr"); //$NON-NLS-1$
